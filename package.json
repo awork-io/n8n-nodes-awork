@@ -54,8 +54,5 @@
   },
   "peerDependencies": {
     "n8n-workflow": "*"
-  },
-  "dependencies": {
-    "Awork": "link:/Users/sebastian/awork/awork-api-n8n-node/nodes/Awork"
   }
 }

@@ -70,7 +70,13 @@ export class Awork implements INodeType {
 						routing: {
 							request: {
 								method: 'GET',
-								url: 'api/v1/projects',
+								url: '=api/v1/projects',
+								qs: {
+									page: '={{$parameter["page"] || undefined}}',
+									pageSize: '={{$parameter["pageSize"] || undefined}}',
+									filterBy: '={{$parameter["filterBy"] || undefined}}',
+									orderBy: '={{$parameter["orderBy"] || undefined}}',
+								},
 							},
 						},
 					},
@@ -99,8 +105,13 @@ export class Awork implements INodeType {
 						routing: {
 							request: {
 								method: 'GET',
-								// Placeholder for project id in URL
 								url: '=api/v1/projects/{{$parameter["projectId"]}}/projecttasks',
+								qs: {
+									page: '={{$parameter["page"] || undefined}}',
+									pageSize: '={{$parameter["pageSize"] || undefined}}',
+									filterBy: '={{$parameter["filterBy"] || undefined}}',
+									orderBy: '={{$parameter["orderBy"] || undefined}}',
+								},
 							},
 						},
 					},
@@ -127,6 +138,87 @@ export class Awork implements INodeType {
 				required: true,
 				description: 'The ID of the project to retrieve tasks from',
 			},
-		]
+			// Optional fields for pagination and filtering
+			{
+				displayName: 'Page',
+				name: 'page',
+				type: 'number',
+				displayOptions: {
+					show: {
+						operation: [
+							'get',
+						],
+						resource: [
+							'project',
+							'projecttask',
+						],
+					},
+				},
+				default: undefined,
+				placeholder: 'e.g., 1',
+				description: 'Page number for pagination. See https://developers.awork.com/pagination for details.',
+				required: false,
+			},
+			{
+				displayName: 'Page Size',
+				name: 'pageSize',
+				type: 'number',
+				displayOptions: {
+					show: {
+						operation: [
+							'get',
+						],
+						resource: [
+							'project',
+							'projecttask',
+						],
+					},
+				},
+				default: undefined,
+				placeholder: 'e.g., 10',
+				description: 'Number of items per page. See https://developers.awork.com/pagination for details.',
+				required: false,
+			},
+			{
+				displayName: 'Filter By',
+				name: 'filterBy',
+				type: 'string',
+				displayOptions: {
+					show: {
+						operation: [
+							'get',
+						],
+						resource: [
+							'project',
+							'projecttask',
+						],
+					},
+				},
+				default: '',
+				placeholder: 'e.g., duration gt 5',
+				description: 'Filter the results by specific criteria. See https://developers.awork.com/filtering for details.',
+				required: false,
+			},
+			{
+				displayName: 'Order By',
+				name: 'orderBy',
+				type: 'string',
+				displayOptions: {
+					show: {
+						operation: [
+							'get',
+						],
+						resource: [
+							'project',
+							'projecttask',
+						],
+					},
+				},
+				default: '',
+				placeholder: 'e.g., FirstName asc',
+				description: 'Order the results by a specific field and direction. See https://developers.awork.com/ordering for details.',
+				required: false,
+			},
+		],
 	};
 }
