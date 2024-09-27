@@ -16,11 +16,11 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18.12' # Set Node.js version to at least 18.12 as required by pnpm
+          node-version: '18.12'
           registry-url: 'https://registry.npmjs.org/'
 
       - name: Install pnpm
-        run: npm install -g pnpm@9.1 # Ensure the correct version of pnpm
+        run: npm install -g pnpm@9.1
 
       - name: Install dependencies
         run: pnpm install
@@ -34,15 +34,15 @@ jobs:
         run: |
           current_version=$(node -p "require('./package.json').version")
           echo "Current version: $current_version"
-          pnpm version patch # This increments the patch version. Use minor or major if needed.
+          pnpm version patch
 
       - name: Push version bump to repo
         run: |
           git push origin main
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub token to allow the push
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish to npm
-        run: pnpm publish --access public # Adjust access if private package
+        run: pnpm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
