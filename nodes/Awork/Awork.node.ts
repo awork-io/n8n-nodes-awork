@@ -17,7 +17,7 @@ export class Awork implements INodeType {
 		outputs: ['main'],
 		credentials: [
 			{
-				name: 'AworkApi',
+				name: 'aworkApi',
 				required: true,
 			},
 		],
@@ -156,8 +156,7 @@ export class Awork implements INodeType {
 				},
 				default: undefined,
 				placeholder: 'e.g., 1',
-				description: 'Page number for pagination. See https://developers.awork.com/pagination for details.',
-				required: false,
+				description: 'Page number for pagination. See https://developers.awork.com/pagination for details.'
 			},
 			{
 				displayName: 'Page Size',
@@ -176,8 +175,7 @@ export class Awork implements INodeType {
 				},
 				default: undefined,
 				placeholder: 'e.g., 10',
-				description: 'Number of items per page. See https://developers.awork.com/pagination for details.',
-				required: false,
+				description: 'Number of items per page. See https://developers.awork.com/pagination for details.'
 			},
 			{
 				displayName: 'Filter By',
@@ -196,8 +194,7 @@ export class Awork implements INodeType {
 				},
 				default: '',
 				placeholder: 'e.g., duration gt 5',
-				description: 'Filter the results by specific criteria. See https://developers.awork.com/filtering for details.',
-				required: false,
+				description: 'Filter the results by specific criteria. See https://developers.awork.com/filtering for details.'
 			},
 			{
 				displayName: 'Order By',
@@ -216,8 +213,7 @@ export class Awork implements INodeType {
 				},
 				default: '',
 				placeholder: 'e.g., FirstName asc',
-				description: 'Order the results by a specific field and direction. See https://developers.awork.com/ordering for details.',
-				required: false,
+				description: 'Order the results by a specific field and direction. See https://developers.awork.com/ordering for details.'
 			},
 		],
 	};

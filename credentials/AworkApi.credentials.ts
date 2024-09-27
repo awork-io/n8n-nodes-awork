@@ -5,7 +5,8 @@ import {
 } from 'n8n-workflow';
 
 export class AworkApi implements ICredentialType {
-	name = 'AworkApi';
+	name = 'aworkApi';
+	// eslint-disable-next-line n8n-nodes-base/cred-class-field-display-name-miscased
 	displayName = 'awork API';
 	documentationUrl = 'https://developers.awork.com/authentication';
 	properties: INodeProperties[] = [
@@ -13,6 +14,7 @@ export class AworkApi implements ICredentialType {
 			displayName: 'API Key',
 			name: 'apiKey',
 			type: 'string',
+			typeOptions: { password: true },
 			default: '',
 			description: 'Enter your awork API Key',
 		},

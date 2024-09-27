@@ -2,6 +2,8 @@
 
 This repo contains the awork n8n nodes to automate workflows with [awork](awork.com) in [n8n](n8n.io). This is based on the starter node repository.
 
+To learn more about the awork API, check out our [Developer Docs](https://developers.awork.com/).
+
 ## Prerequisites
 
 You need the following installed on your development machine:
