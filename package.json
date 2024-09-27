@@ -1,19 +1,20 @@
 {
-  "name": "n8n-nodes-<...>",
+  "name": "n8n-nodes-awork",
   "version": "0.1.0",
-  "description": "",
+  "description": "Automate your workflows with the awork API",
   "keywords": [
-    "n8n-community-node-package"
+    "n8n-community-node-package",
+    "awork"
   ],
   "license": "MIT",
-  "homepage": "",
+  "homepage": "https://www.awork.com",
   "author": {
-    "name": "",
-    "email": ""
+    "name": "awork GmbH",
+    "email": "support@awork.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/<...>/n8n-nodes-<...>.git"
+    "url": "https://github.com/awork-io/awork-api-n8n-node.git"
   },
   "engines": {
     "node": ">=18.10",
@@ -36,12 +37,10 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "credentials": [
-      "dist/credentials/ExampleCredentialsApi.credentials.js",
-      "dist/credentials/HttpBinApi.credentials.js"
+      "dist/credentials/AworkApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/ExampleNode/ExampleNode.node.js",
-      "dist/nodes/HttpBin/HttpBin.node.js"
+      "dist/nodes/Awork/Awork.node.js"
     ]
   },
   "devDependencies": {
@@ -55,5 +54,8 @@
   },
   "peerDependencies": {
     "n8n-workflow": "*"
+  },
+  "dependencies": {
+    "Awork": "link:/Users/sebastian/awork/awork-api-n8n-node/nodes/Awork"
   }
 }
