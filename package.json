@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/awork-io/awork-api-n8n-node.git"
+    "url": "https://github.com/awork-io/n8n-nodes-awork.git"
   },
   "engines": {
     "node": ">=18.10",
