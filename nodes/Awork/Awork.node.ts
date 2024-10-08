@@ -1,4 +1,5 @@
 import { INodeType, INodeTypeDescription } from 'n8n-workflow';
+import { aworkApiPagination, simplifyGetResponse } from './GenericFunctions';
 
 export class Awork implements INodeType {
 	description: INodeTypeDescription = {
@@ -72,12 +73,16 @@ export class Awork implements INodeType {
 								method: 'GET',
 								url: '=api/v1/projects',
 								qs: {
-									page: '={{$parameter["page"] || undefined}}',
-									pageSize: '={{$parameter["pageSize"] || undefined}}',
 									filterBy: '={{$parameter["filterBy"] || undefined}}',
 									orderBy: '={{$parameter["orderBy"] || undefined}}',
 								},
 							},
+							operations: {
+								pagination: aworkApiPagination,
+							},
+							send: {
+								paginate: true,
+							}
 						},
 					},
 				],
@@ -107,14 +112,42 @@ export class Awork implements INodeType {
 								method: 'GET',
 								url: '=api/v1/projects/{{$parameter["projectId"]}}/projecttasks',
 								qs: {
-									page: '={{$parameter["page"] || undefined}}',
-									pageSize: '={{$parameter["pageSize"] || undefined}}',
 									filterBy: '={{$parameter["filterBy"] || undefined}}',
 									orderBy: '={{$parameter["orderBy"] || undefined}}',
 								},
 							},
+							operations: {
+								pagination: aworkApiPagination,
+							},
+							send: {
+								paginate: true,
+							}
 						},
 					},
+					{
+						name: 'Post',
+						value: 'post',
+						action: 'Create a project task',
+						description: 'Create a task in a project by sending task details',
+						routing: {
+							request: {
+								method: 'POST',
+								url: '=api/v1/tasks',
+								body: {
+									baseType: 'projecttask',
+									entityId: '={{$parameter["projectId"]}}', // ID of the project the task belongs to
+									name: '={{$parameter["taskName"]}}',     // Task name
+									description: '={{$parameter["taskDescription"]}}',  // Optional task description
+									dueDate: '={{$parameter["dueDate"]}}', // Optional due date for the task
+									typeOfWorkId: '={{$parameter["typeOfWorkId"]}}', // Required type of work ID
+									taskStatusId: '={{$parameter["taskStatusId"]}}', // Required task status ID
+								}
+							},
+							output: {
+								postReceive: [simplifyGetResponse],
+							},
+						},
+					}
 				],
 				default: 'get',
 			},
@@ -138,44 +171,129 @@ export class Awork implements INodeType {
 				required: true,
 				description: 'The ID of the project to retrieve tasks from',
 			},
-			// Optional fields for pagination and filtering
 			{
-				displayName: 'Page',
-				name: 'page',
-				type: 'number',
+				displayName: 'Project ID',
+				name: 'projectId',
+				type: 'string',
 				displayOptions: {
 					show: {
-						operation: [
-							'get',
-						],
 						resource: [
-							'project',
 							'projecttask',
+						],
+						operation: [
+							'post',
 						],
 					},
 				},
-				default: undefined,
-				placeholder: 'e.g., 1',
-				description: 'Page number for pagination. See https://developers.awork.com/pagination for details.'
+				default: '',
+				description: 'The ID of the project to which the task will be added',
+				required: true,
 			},
 			{
-				displayName: 'Page Size',
-				name: 'pageSize',
-				type: 'number',
+				displayName: 'Task Name',
+				name: 'taskName',
+				type: 'string',
 				displayOptions: {
 					show: {
-						operation: [
-							'get',
+						resource: [
+							'projecttask',
 						],
+						operation: [
+							'post',
+						],
+					},
+				},
+				default: '',
+				placeholder: 'Enter the task name',
+				description: 'The name of the task',
+				required: true,
+			},
+			{
+				displayName: 'Task Description',
+				name: 'taskDescription',
+				type: 'string',
+				displayOptions: {
+					show: {
+						resource: [
+							'projecttask',
+						],
+						operation: [
+							'post',
+						],
+					},
+				},
+				default: '',
+				description: 'A brief description of the task'
+			},
+			{
+				displayName: 'Type of Work ID',
+				name: 'typeOfWorkId',
+				type: 'string',
+				displayOptions: {
+					show: {
+						resource: [
+							'projecttask',
+						],
+						operation: [
+							'post',
+						],
+					},
+				},
+				default: '',
+				description: 'The type of work ID for the task',
+				required: true,
+			},
+			{
+				displayName: 'Task Status ID',
+				name: 'taskStatusId',
+				type: 'string',
+				displayOptions: {
+					show: {
+						resource: [
+							'projecttask',
+						],
+						operation: [
+							'post',
+						],
+					},
+				},
+				default: '',
+				description: 'The task status ID for the task',
+				required: true,
+			},
+			{
+				displayName: 'Due Date',
+				name: 'dueDate',
+				type: 'dateTime',
+				displayOptions: {
+					show: {
+						resource: [
+							'projecttask',
+						],
+						operation: [
+							'post',
+						],
+					},
+				},
+				default: '',
+				description: 'The due date for the task'
+			},
+			// Optional fields for pagination and filtering
+			{
+				displayName: 'Return All',
+				name: 'returnAll',
+				type: 'boolean',
+				displayOptions: {
+					show: {
 						resource: [
 							'project',
 							'projecttask',
 						],
+						operation: ['get'],
 					},
 				},
-				default: undefined,
-				placeholder: 'e.g., 10',
-				description: 'Number of items per page. See https://developers.awork.com/pagination for details.'
+				default: false,
+				description: 'Whether to return all results or only up to a given limit'
 			},
 			{
 				displayName: 'Filter By',
@@ -183,12 +301,12 @@ export class Awork implements INodeType {
 				type: 'string',
 				displayOptions: {
 					show: {
-						operation: [
-							'get',
-						],
 						resource: [
 							'project',
 							'projecttask',
+						],
+						operation: [
+							'get',
 						],
 					},
 				},
@@ -202,12 +320,12 @@ export class Awork implements INodeType {
 				type: 'string',
 				displayOptions: {
 					show: {
-						operation: [
-							'get',
-						],
 						resource: [
 							'project',
 							'projecttask',
+						],
+						operation: [
+							'get',
 						],
 					},
 				},
