@@ -26,7 +26,7 @@ In the node's source folder, run:
 pnpm run build && pnpm link --global
 ```
 
-Navigate to the custom nodes folder of your local n8n instance, usually `~/.n8n/custom`, and run:
+Navigate to the custom nodes folder of your local n8n instance, usually `~/.n8n/custom`, and run (only required once):
 
 ```sh
 npm link n8n-nodes-awork

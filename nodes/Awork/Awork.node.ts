@@ -1,5 +1,5 @@
 import { INodeType, INodeTypeDescription } from 'n8n-workflow';
-import { aworkApiPagination, simplifyGetResponse } from './GenericFunctions';
+import { aworkApiPagination } from './GenericFunctions';
 
 export class Awork implements INodeType {
 	description: INodeTypeDescription = {
@@ -64,10 +64,9 @@ export class Awork implements INodeType {
 				},
 				options: [
 					{
-						name: 'Get',
-						value: 'get',
+						name: 'Get All Projects',
+						value: 'getall',
 						action: 'Get projects',
-						description: 'Get all projects',
 						routing: {
 							request: {
 								method: 'GET',
@@ -82,6 +81,17 @@ export class Awork implements INodeType {
 							},
 							send: {
 								paginate: true,
+							}
+						},
+					},
+					{
+						name: 'Get Project by ID',
+						value: 'get',
+						action: 'Get project by id',
+						routing: {
+							request: {
+								method: 'GET',
+								url: '=api/v1/projects/{{$parameter["projectId"]}}'
 							}
 						},
 					},
@@ -103,10 +113,9 @@ export class Awork implements INodeType {
 				},
 				options: [
 					{
-						name: 'Get',
-						value: 'get',
+						name: 'Get Tasks of Project',
+						value: 'gettasksofproject',
 						action: 'Get tasks of a project',
-						description: 'Get all tasks of a project',
 						routing: {
 							request: {
 								method: 'GET',
@@ -121,6 +130,17 @@ export class Awork implements INodeType {
 							},
 							send: {
 								paginate: true,
+							}
+						},
+					},
+					{
+						name: 'Get Task by ID',
+						value: 'get',
+						action: 'Get task by id',
+						routing: {
+							request: {
+								method: 'GET',
+								url: '=api/v1/tasks/{{$parameter["taskId"]}}'
 							}
 						},
 					},
@@ -143,9 +163,6 @@ export class Awork implements INodeType {
 									taskStatusId: '={{$parameter["taskStatusId"]}}', // Required task status ID
 								}
 							},
-							output: {
-								postReceive: [simplifyGetResponse],
-							},
 						},
 					}
 				],
@@ -159,7 +176,7 @@ export class Awork implements INodeType {
 				displayOptions: {
 					show: {
 						resource: [
-							'projecttask',
+							'project',
 						],
 						operation: [
 							'get',
@@ -169,7 +186,26 @@ export class Awork implements INodeType {
 				default: '',
 				placeholder: 'Enter the project ID',
 				required: true,
-				description: 'The ID of the project to retrieve tasks from',
+				description: 'The ID of the project to retrieve',
+			},
+			{
+				displayName: 'Project ID',
+				name: 'projectId',
+				type: 'string',
+				displayOptions: {
+					show: {
+						resource: [
+							'projecttask',
+						],
+						operation: [
+							'gettasksofproject',
+						],
+					},
+				},
+				default: '',
+				placeholder: 'Enter the project ID',
+				required: true,
+				description: 'The ID of the project to retrieve tasks for',
 			},
 			{
 				displayName: 'Project ID',
@@ -186,8 +222,27 @@ export class Awork implements INodeType {
 					},
 				},
 				default: '',
-				description: 'The ID of the project to which the task will be added',
+				description: 'The ID of the project in which the task will be created',
 				required: true,
+			},
+			{
+				displayName: 'Task ID',
+				name: 'taskId',
+				type: 'string',
+				displayOptions: {
+					show: {
+						resource: [
+							'projecttask',
+						],
+						operation: [
+							'get',
+						],
+					},
+				},
+				default: '',
+				placeholder: 'Enter the task ID',
+				required: true,
+				description: 'The ID of the task to retrieve',
 			},
 			{
 				displayName: 'Task Name',
@@ -289,7 +344,10 @@ export class Awork implements INodeType {
 							'project',
 							'projecttask',
 						],
-						operation: ['get'],
+						operation: [
+							'getall',
+							'gettasksofproject',
+						],
 					},
 				},
 				default: false,
@@ -306,7 +364,8 @@ export class Awork implements INodeType {
 							'projecttask',
 						],
 						operation: [
-							'get',
+							'getall',
+							'gettasksofproject',
 						],
 					},
 				},
@@ -325,7 +384,8 @@ export class Awork implements INodeType {
 							'projecttask',
 						],
 						operation: [
-							'get',
+							'getall',
+							'gettasksofproject',
 						],
 					},
 				},

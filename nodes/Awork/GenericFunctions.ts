@@ -42,17 +42,3 @@ export async function aworkApiPagination(
 
 	return items;
 }
-
-export async function simplifyGetResponse(
-	this: IExecuteSingleFunctions,
-	items: INodeExecutionData[],
-	_response: IN8nHttpFullResponse,
-): Promise<INodeExecutionData[]> {
-	this.logger.debug(`Response: ${jsonStringify(items)}`);
-	// const simplify = this.getNodeParameter('simplify');
-	// if (!simplify) return items;
-	// const item = items[0].json as OktaUser;
-	// const simplifiedItem = simplifyOktaUser(item);
-
-	return items;
-}
