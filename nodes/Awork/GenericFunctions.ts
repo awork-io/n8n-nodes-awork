@@ -1,4 +1,4 @@
-import { DeclarativeRestApiSettings, IExecutePaginationFunctions, IExecuteSingleFunctions, IN8nHttpFullResponse, INodeExecutionData, jsonStringify } from "n8n-workflow";
+import { DeclarativeRestApiSettings, IExecutePaginationFunctions, INodeExecutionData } from "n8n-workflow";
 
 export async function aworkApiPagination(
 	this: IExecutePaginationFunctions,
