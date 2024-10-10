@@ -52,7 +52,8 @@ export const taskInputs: INodeProperties[] =
 						'get',
 						'settaskcustomfield',
 						'addtag',
-						'changestatus'
+						'changestatus',
+						'comments'
 					],
 				},
 			},
@@ -217,5 +218,22 @@ export const taskInputs: INodeProperties[] =
 			},
 			default: '',
 			description: 'The ID of the status'
+		},
+		{
+			displayName: 'Comment Message',
+			name: 'commentMessage',
+			type: 'string',
+			displayOptions: {
+				show: {
+					resource: [
+						'projecttask',
+					],
+					operation: [
+						'comments',
+					],
+				},
+			},
+			default: '',
+			description: 'The message of the comment'
 		}
 	];

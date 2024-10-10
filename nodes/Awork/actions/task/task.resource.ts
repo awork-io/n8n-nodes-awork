@@ -118,6 +118,20 @@ export const taskResource: INodeProperties =
 				},
 			},
 		},
+		{
+			name: 'Add Comment',
+			value: 'comments',
+			action: 'Add comment',
+			routing: {
+				request: {
+					method: 'POST',
+					url: '=api/v1/tasks/{{$parameter["taskId"]}}/comments',
+					body: {
+						message: '={{$parameter["commentMessage"]}}',
+					}
+				},
+			},
+		},
 	],
 	default: 'get',
 };
