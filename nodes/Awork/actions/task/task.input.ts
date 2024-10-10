@@ -51,7 +51,8 @@ export const taskInputs: INodeProperties[] =
 					operation: [
 						'get',
 						'settaskcustomfield',
-						'addtag'
+						'addtag',
+						'changestatus'
 					],
 				},
 			},
@@ -185,7 +186,7 @@ export const taskInputs: INodeProperties[] =
 		},
 		{
 			displayName: 'Tag Name',
-			name: 'tagname',
+			name: 'tagName',
 			type: 'string',
 			displayOptions: {
 				show: {
@@ -199,5 +200,22 @@ export const taskInputs: INodeProperties[] =
 			},
 			default: '',
 			description: 'The name of the tag'
+		},
+		{
+			displayName: 'Status ID',
+			name: 'statusId',
+			type: 'string',
+			displayOptions: {
+				show: {
+					resource: [
+						'projecttask',
+					],
+					operation: [
+						'changestatus',
+					],
+				},
+			},
+			default: '',
+			description: 'The ID of the status'
 		}
 	];

@@ -95,7 +95,24 @@ export const taskResource: INodeProperties =
 					url: '=api/v1/tasks/{{$parameter["taskId"]}}/addtags',
 					body: [
 						{
-							name: '={{$parameter["tagname"]}}',
+							name: '={{$parameter["tagName"]}}',
+						}
+					]
+				},
+			},
+		},
+		{
+			name: 'Change Status',
+			value: 'changestatus',
+			action: 'Change status',
+			routing: {
+				request: {
+					method: 'POST',
+					url: '=api/v1/tasks/changestatuses',
+					body: [
+						{
+							taskId: '={{$parameter["taskId"]}}',
+							statusId: '={{$parameter["statusId"]}}',
 						}
 					]
 				},
