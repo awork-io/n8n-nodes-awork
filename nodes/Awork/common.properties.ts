@@ -29,6 +29,7 @@ export const commonProperties: INodeProperties[] = [
 				resource: [
 					'project',
 					'projecttask',
+					'user'
 				],
 				operation: [
 					'getall',

@@ -4,6 +4,8 @@ import { projectResource } from './actions/project/project.resource';
 import { projectInputs } from './actions/project/project.input';
 import { taskResource } from './actions/task/task.resource';
 import { taskInputs } from './actions/task/task.input';
+import { userResource } from './actions/user/user.resource';
+import { userInputs } from './actions/user/user.input';
 
 export class Awork implements INodeType {
 	description: INodeTypeDescription = {
@@ -50,6 +52,10 @@ export class Awork implements INodeType {
 						name: 'Project Task',
 						value: 'projecttask',
 					},
+					{
+						name: 'User',
+						value: 'user',
+					},
 				],
 				default: 'project',
 			},
@@ -59,6 +65,9 @@ export class Awork implements INodeType {
 			// Operations for the Project Task resource
 			taskResource,
 			...taskInputs,
+			// Operations for the User resource
+			userResource,
+			...userInputs,
 			// Optional fields for pagination and filtering
 			...commonProperties
 		],
