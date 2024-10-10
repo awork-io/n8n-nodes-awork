@@ -47,6 +47,17 @@ export const projectResource: INodeProperties =
 				}
 			},
 		},
+		{
+			name: 'Get Task Statues',
+			value: 'gettasstatuses',
+			action: 'Get task statuses by project id',
+			routing: {
+				request: {
+					method: 'GET',
+					url: '=api/v1/projects/{{$parameter["projectId"]}}/taskstatuses'
+				},
+			},
+		},
 	],
 	default: 'get',
 };
