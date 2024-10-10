@@ -85,6 +85,22 @@ export const taskResource: INodeProperties =
 				},
 			},
 		},
+		{
+			name: 'Add Tag',
+			value: 'addtag',
+			action: 'Add tag',
+			routing: {
+				request: {
+					method: 'POST',
+					url: '=api/v1/tasks/{{$parameter["taskId"]}}/addtags',
+					body: [
+						{
+							name: '={{$parameter["tagname"]}}',
+						}
+					]
+				},
+			},
+		},
 	],
 	default: 'get',
 };

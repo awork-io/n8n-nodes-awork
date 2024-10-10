@@ -51,6 +51,7 @@ export const taskInputs: INodeProperties[] =
 					operation: [
 						'get',
 						'settaskcustomfield',
+						'addtag'
 					],
 				},
 			},
@@ -181,5 +182,22 @@ export const taskInputs: INodeProperties[] =
 			},
 			default: '',
 			description: 'The ID of the custom field definition'
+		},
+		{
+			displayName: 'Tag Name',
+			name: 'tagname',
+			type: 'string',
+			displayOptions: {
+				show: {
+					resource: [
+						'projecttask',
+					],
+					operation: [
+						'addtag',
+					],
+				},
+			},
+			default: '',
+			description: 'The name of the tag'
 		}
 	];
