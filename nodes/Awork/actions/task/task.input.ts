@@ -53,7 +53,8 @@ export const taskInputs: INodeProperties[] =
 						'settaskcustomfield',
 						'addtag',
 						'changestatus',
-						'comments'
+						'comments',
+						'settaskassignee'
 					],
 				},
 			},
@@ -235,5 +236,22 @@ export const taskInputs: INodeProperties[] =
 			},
 			default: '',
 			description: 'The message of the comment'
-		}
+		},
+		{
+			displayName: 'User ID',
+			name: 'userId',
+			type: 'string',
+			displayOptions: {
+				show: {
+					resource: [
+						'projecttask',
+					],
+					operation: [
+						'settaskassignee',
+					],
+				},
+			},
+			default: '',
+			description: 'The ID of the user'
+		},
 	];

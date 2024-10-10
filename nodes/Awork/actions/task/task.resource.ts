@@ -132,6 +132,20 @@ export const taskResource: INodeProperties =
 				},
 			},
 		},
+		{
+			name: 'Set Task Assignee',
+			value: 'settaskassignee',
+			action: 'Set a task assignee',
+			routing: {
+				request: {
+					method: 'POST',
+					url: '=api/v1/tasks/{{$parameter["taskId"]}}/setassignees',
+					body: [
+						'={{$parameter["userId"]}}'
+					]
+				},
+			},
+		},
 	],
 	default: 'get',
 };
