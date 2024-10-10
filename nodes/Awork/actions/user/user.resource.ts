@@ -29,5 +29,5 @@ export const userResource: INodeProperties =
             },
         },
     ],
-    default: 'get',
+    default: 'getall',
 };
