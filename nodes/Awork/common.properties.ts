@@ -8,12 +8,17 @@ export const commonProperties: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: [
+					'user',
+					'company',
 					'project',
 					'projecttask',
 				],
 				operation: [
 					'getall',
 					'gettasksofproject',
+					'gettypesofwork',
+					'gettaskstatuses',
+					'getprojectstatuses',
 				],
 			},
 		},
@@ -27,13 +32,17 @@ export const commonProperties: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: [
+					'user',
+					'company',
 					'project',
-					'projecttask',
-					'user'
+					'projecttask'
 				],
 				operation: [
 					'getall',
 					'gettasksofproject',
+					'gettypesofwork',
+					'gettaskstatuses',
+					'getprojectstatuses',
 				],
 			},
 		},
@@ -48,12 +57,17 @@ export const commonProperties: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: [
+					'user',
+					'company',
 					'project',
 					'projecttask',
 				],
 				operation: [
 					'getall',
 					'gettasksofproject',
+					'gettypesofwork',
+					'gettaskstatuses',
+					'getprojectstatuses',
 				],
 			},
 		},

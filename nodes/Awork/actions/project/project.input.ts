@@ -13,7 +13,7 @@ export const projectInputs: INodeProperties[] =
 					],
 					operation: [
 						'get',
-						'gettasstatuses'
+						'gettaskstatuses'
 					],
 				},
 			},
