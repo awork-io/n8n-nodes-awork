@@ -58,6 +58,10 @@ export class Awork implements INodeType {
 						name: 'User',
 						value: 'user',
 					},
+					{
+						name: 'Company',
+						value: 'company',
+					},
 				],
 				default: 'project',
 			},
