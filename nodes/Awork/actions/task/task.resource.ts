@@ -85,6 +85,27 @@ export const taskResource: INodeProperties =
 				},
 			},
 		},
+		{
+			name: 'Get Types of Work',
+			value: 'gettypesofwork',
+			action: 'Get types of work',
+			routing: {
+				request: {
+					method: 'GET',
+					url: '=api/v1/typeofwork',
+					qs: {
+						filterBy: '={{$parameter["filterBy"] || undefined}}',
+						orderBy: '={{$parameter["orderBy"] || undefined}}',
+					},
+				},
+				operations: {
+					pagination: aworkApiPagination,
+				},
+				send: {
+					paginate: true,
+				}
+			},
+		},
 	],
 	default: 'get',
 };

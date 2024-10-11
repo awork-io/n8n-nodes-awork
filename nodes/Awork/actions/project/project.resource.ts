@@ -47,6 +47,44 @@ export const projectResource: INodeProperties =
 				}
 			},
 		},
+		{
+			name: 'Get All Project Statuses',
+			value: 'getprojectstatuses',
+			action: 'Get projects statuses',
+			routing: {
+				request: {
+					method: 'GET',
+					url: '=api/v1/projectstatuses',
+					qs: {
+						filterBy: '={{$parameter["filterBy"] || undefined}}',
+						orderBy: '={{$parameter["orderBy"] || undefined}}',
+					},
+				},
+				operations: {
+					pagination: aworkApiPagination,
+				},
+				send: {
+					paginate: true,
+				}
+			},
+		},
+		{
+			name: 'Get Task Statuses of Project',
+			value: 'gettaskstatuses',
+			action: 'Get task statuses of project by id',
+			routing: {
+				request: {
+					method: 'GET',
+					url: '=api/v1/projects/{{$parameter["projectId"]}}/taskstatuses'
+				},
+				operations: {
+					pagination: aworkApiPagination,
+				},
+				send: {
+					paginate: true,
+				}
+			},
+		},
 	],
 	default: 'get',
 };
