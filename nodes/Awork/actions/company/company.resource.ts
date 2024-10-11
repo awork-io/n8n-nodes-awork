@@ -1,7 +1,7 @@
 import { INodeProperties } from 'n8n-workflow';
 import { aworkApiPagination } from '../../GenericFunctions';
 
-export const userResource: INodeProperties =
+export const companyResource: INodeProperties =
 {
 	displayName: 'Operation',
 	name: 'operation',
@@ -10,19 +10,19 @@ export const userResource: INodeProperties =
 	displayOptions: {
 		show: {
 			resource: [
-				'user',
+				'company',
 			],
 		},
 	},
 	options: [
 		{
-			name: 'Get All Users',
+			name: 'Get All Companies',
 			value: 'getall',
-			action: 'Get users',
+			action: 'Get companies',
 			routing: {
 				request: {
 					method: 'GET',
-					url: '=api/v1/users',
+					url: '=api/v1/companies',
 					qs: {
 						filterBy: '={{$parameter["filterBy"] || undefined}}',
 						orderBy: '={{$parameter["orderBy"] || undefined}}',
@@ -37,13 +37,13 @@ export const userResource: INodeProperties =
 			},
 		},
 		{
-			name: 'Get User by ID',
+			name: 'Get Company by ID',
 			value: 'get',
-			action: 'Get user by id',
+			action: 'Get company by id',
 			routing: {
 				request: {
 					method: 'GET',
-					url: '=api/v1/users/{{$parameter["userId"]}}'
+					url: '=api/v1/companies/{{$parameter["companyId"]}}'
 				}
 			},
 		},
