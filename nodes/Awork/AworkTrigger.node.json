@@ -1,5 +1,5 @@
 {
-	"node": "n8n-nodes-base.Awork",
+	"node": "n8n-nodes-base.AworkTrigger",
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
 	"categories": [

@@ -15,7 +15,7 @@ export class Awork implements INodeType {
 		displayName: 'awork',
 		name: 'awork',
 		icon: 'file:awork.svg',
-		group: ['transform'],
+		group: ['input'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
 		description: 'Automate your workflows with the awork API',
