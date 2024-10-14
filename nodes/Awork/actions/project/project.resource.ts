@@ -69,6 +69,27 @@ export const projectResource: INodeProperties =
 			},
 		},
 		{
+			name: 'Create Project',
+			value: 'post',
+			action: 'Create a project',
+			description: 'Create a project by sending project details',
+			routing: {
+				request: {
+					method: 'POST',
+					url: '=api/v1/projects',
+					body: {
+						baseType: 'projecttask',
+						name: '={{$parameter["projectName"]}}',     // Project name
+						description: '={{$parameter["projectDescription"]}}',  // Optional project description
+						startDate: '={{$parameter["startDate"]}}', // Optional start date for the project
+						dueDate: '={{$parameter["dueDate"]}}', // Optional due date for the project
+						projectTypeId: '={{$parameter["projectTypeId"]}}',
+						projectStatusId: '={{$parameter["projectStatusId"]}}',
+					}
+				},
+			},
+		},
+		{
 			name: 'Get Task Statuses of Project',
 			value: 'gettaskstatuses',
 			action: 'Get task statuses of project by id',

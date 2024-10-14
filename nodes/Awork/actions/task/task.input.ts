@@ -13,6 +13,7 @@ export const taskInputs: INodeProperties[] =
 					],
 					operation: [
 						'gettasksofproject',
+						'gettasklistsofproject'
 					],
 				},
 			},
@@ -97,7 +98,7 @@ export const taskInputs: INodeProperties[] =
 				},
 			},
 			default: '',
-			description: 'A brief description of the task'
+			description: 'The description of the task'
 		},
 		{
 			displayName: 'Type of Work ID',

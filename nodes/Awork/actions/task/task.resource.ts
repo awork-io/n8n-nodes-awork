@@ -48,7 +48,7 @@ export const taskResource: INodeProperties =
 			},
 		},
 		{
-			name: 'Post',
+			name: 'Create Task',
 			value: 'post',
 			action: 'Create a project task',
 			description: 'Create a task in a project by sending task details',
@@ -154,6 +154,27 @@ export const taskResource: INodeProperties =
 				request: {
 					method: 'GET',
 					url: '=api/v1/typeofwork',
+					qs: {
+						filterBy: '={{$parameter["filterBy"] || undefined}}',
+						orderBy: '={{$parameter["orderBy"] || undefined}}',
+					},
+				},
+				operations: {
+					pagination: aworkApiPagination,
+				},
+				send: {
+					paginate: true,
+				}
+			},
+		},
+		{
+			name: 'Get Task Lists of Project',
+			value: 'gettasklistsofproject',
+			action: 'Get task lists of a project',
+			routing: {
+				request: {
+					method: 'GET',
+					url: '=api/v1/projects/{{$parameter["projectId"]}}/tasklists',
 					qs: {
 						filterBy: '={{$parameter["filterBy"] || undefined}}',
 						orderBy: '={{$parameter["orderBy"] || undefined}}',
