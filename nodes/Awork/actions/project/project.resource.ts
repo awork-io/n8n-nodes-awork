@@ -83,8 +83,8 @@ export const projectResource: INodeProperties =
 						description: '={{$parameter["projectDescription"]}}',  // Optional project description
 						startDate: '={{$parameter["startDate"]}}', // Optional start date for the project
 						dueDate: '={{$parameter["dueDate"]}}', // Optional due date for the project
-						projectTypeId: '={{$parameter["projectTypeId"]}}',
-						projectStatusId: '={{$parameter["projectStatusId"]}}',
+						projectTypeId: '={{$parameter["projectTypeId"] || undefined}}',
+						projectStatusId: '={{$parameter["projectStatusId"] || undefined}}',
 					}
 				},
 			},
