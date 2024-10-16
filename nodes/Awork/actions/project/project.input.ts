@@ -13,14 +13,15 @@ export const projectInputs: INodeProperties[] =
 					],
 					operation: [
 						'get',
-						'gettaskstatuses'
+						'gettaskstatuses',
+						'postprojectstatus',
+						'changeprojectstatus'
 					],
 				},
 			},
 			default: '',
 			placeholder: 'Enter the project ID',
-			required: true,
-			description: 'The ID of the project to retrieve',
+			required: true
 		},
 		{
 			displayName: 'Project Name',
@@ -126,6 +127,57 @@ export const projectInputs: INodeProperties[] =
 			},
 			default: undefined,
 			description: 'The project status ID for the project',
+			required: true,
+		},
+		{
+			displayName: 'Project Status Name',
+			name: 'projectStatusName',
+			type: 'string',
+			displayOptions: {
+				show: {
+					resource: [
+						'project',
+					],
+					operation: [
+						'postprojectstatus',
+					],
+				},
+			},
+			default: 'Not Started',
+			required: true,
+		},
+		{
+			displayName: 'Project Status Type',
+			name: 'projectStatusType',
+			type: 'string',
+			displayOptions: {
+				show: {
+					resource: [
+						'project',
+					],
+					operation: [
+						'postprojectstatus',
+					],
+				},
+			},
+			default: 'not-started',
+			required: true,
+		},
+		{
+			displayName: 'Project Status ID',
+			name: 'projectStatusId',
+			type: 'string',
+			displayOptions: {
+				show: {
+					resource: [
+						'project',
+					],
+					operation: [
+						'changeprojectstatus',
+					],
+				},
+			},
+			default: undefined,
 			required: true,
 		},
 	];

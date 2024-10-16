@@ -78,11 +78,10 @@ export const projectResource: INodeProperties =
 					method: 'POST',
 					url: '=api/v1/projects',
 					body: {
-						baseType: 'projecttask',
-						name: '={{$parameter["projectName"]}}',     // Project name
-						description: '={{$parameter["projectDescription"]}}',  // Optional project description
-						startDate: '={{$parameter["startDate"]}}', // Optional start date for the project
-						dueDate: '={{$parameter["dueDate"]}}', // Optional due date for the project
+						name: '={{$parameter["projectName"]}}',
+						description: '={{$parameter["projectDescription"]}}',
+						startDate: '={{$parameter["startDate"]}}',
+						dueDate: '={{$parameter["dueDate"]}}',
 						projectTypeId: '={{$parameter["projectTypeId"] || undefined}}',
 						projectStatusId: '={{$parameter["projectStatusId"] || undefined}}',
 					}
@@ -108,6 +107,37 @@ export const projectResource: INodeProperties =
 				send: {
 					paginate: true,
 				}
+			},
+		},
+		{
+			name: 'Create Project Status',
+			value: 'postprojectstatus',
+			action: 'Create a project status',
+			description: 'Create a project status by sending project status details',
+			routing: {
+				request: {
+					method: 'POST',
+					url: '=api/v1/projects/{{$parameter["projectId"]}}/projectstatuses',
+					body: {
+						name: '={{$parameter["projectStatusName"]}}',
+						type: '={{$parameter["projectStatusType"]}}'
+					}
+				},
+			},
+		},
+		{
+			name: 'Change Project Status',
+			value: 'changeprojectstatus',
+			action: 'Change the project status',
+			description: 'Changes the project status of a project',
+			routing: {
+				request: {
+					method: 'POST',
+					url: '=api/v1/projects/{{$parameter["projectId"]}}/changestatus',
+					body: {
+						projectStatusId: '={{$parameter["projectStatusId"]}}'
+					}
+				},
 			},
 		},
 	],
