@@ -188,6 +188,22 @@ export const taskResource: INodeProperties =
 				}
 			},
 		},
+		{
+			name: 'Create Type of Work',
+			value: 'posttypeofwork',
+			action: 'Create a type of work',
+			routing: {
+				request: {
+					method: 'POST',
+					url: '=api/v1/typeofwork',
+					body: {
+						name: '={{$parameter["name"]}}',
+						description: '={{$parameter["description"]}}',
+						icon: '={{$parameter["icon"]}}',
+					}
+				},
+			},
+		},
 	],
 	default: 'get',
 };

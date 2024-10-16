@@ -8,6 +8,7 @@ import { userResource } from './actions/user/user.resource';
 import { userInputs } from './actions/user/user.input';
 import { companyResource } from './actions/company/company.resource';
 import { companyInputs } from './actions/company/company.input';
+import { commonInputs } from './actions/common.input';
 
 export class Awork implements INodeType {
 	description: INodeTypeDescription = {
@@ -77,6 +78,8 @@ export class Awork implements INodeType {
 			// Operations for the Company resource
 			companyResource,
 			...companyInputs,
+			// Common inputs such as name, description, type, etc.
+			...commonInputs,
 			// Optional fields for pagination and filtering
 			...commonProperties
 		],
