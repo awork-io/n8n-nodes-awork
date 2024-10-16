@@ -15,7 +15,8 @@ export const projectInputs: INodeProperties[] =
 						'get',
 						'gettaskstatuses',
 						'postprojectstatus',
-						'changeprojectstatus'
+						'changeprojectstatus',
+						'posttaskstatus'
 					],
 				},
 			},
@@ -130,8 +131,8 @@ export const projectInputs: INodeProperties[] =
 			required: true,
 		},
 		{
-			displayName: 'Project Status Name',
-			name: 'projectStatusName',
+			displayName: 'Status Name',
+			name: 'statusName',
 			type: 'string',
 			displayOptions: {
 				show: {
@@ -140,6 +141,7 @@ export const projectInputs: INodeProperties[] =
 					],
 					operation: [
 						'postprojectstatus',
+						'posttaskstatus',
 					],
 				},
 			},
@@ -147,8 +149,8 @@ export const projectInputs: INodeProperties[] =
 			required: true,
 		},
 		{
-			displayName: 'Project Status Type',
-			name: 'projectStatusType',
+			displayName: 'Status Type',
+			name: 'statusType',
 			type: 'string',
 			displayOptions: {
 				show: {
@@ -157,10 +159,28 @@ export const projectInputs: INodeProperties[] =
 					],
 					operation: [
 						'postprojectstatus',
+						'posttaskstatus',
 					],
 				},
 			},
-			default: 'not-started',
+			default: '',
+			required: true,
+		},
+		{
+			displayName: 'Task Status Icon',
+			name: 'taskStatusIcon',
+			type: 'string',
+			displayOptions: {
+				show: {
+					resource: [
+						'project',
+					],
+					operation: [
+						'posttaskstatus',
+					],
+				},
+			},
+			default: 'arrow_forward',
 			required: true,
 		},
 		{

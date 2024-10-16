@@ -119,8 +119,8 @@ export const projectResource: INodeProperties =
 					method: 'POST',
 					url: '=api/v1/projects/{{$parameter["projectId"]}}/projectstatuses',
 					body: {
-						name: '={{$parameter["projectStatusName"]}}',
-						type: '={{$parameter["projectStatusType"]}}'
+						name: '={{$parameter["statusName"]}}',
+						type: '={{$parameter["statusType"]}}'
 					}
 				},
 			},
@@ -136,6 +136,23 @@ export const projectResource: INodeProperties =
 					url: '=api/v1/projects/{{$parameter["projectId"]}}/changestatus',
 					body: {
 						projectStatusId: '={{$parameter["projectStatusId"]}}'
+					}
+				},
+			},
+		},
+		{
+			name: 'Create Task Status',
+			value: 'posttaskstatus',
+			action: 'Create a task status',
+			description: 'Create a task status by sending task status details',
+			routing: {
+				request: {
+					method: 'POST',
+					url: '=api/v1/projects/{{$parameter["projectId"]}}/taskstatuses',
+					body: {
+						name: '={{$parameter["statusName"]}}',
+						type: '={{$parameter["statusType"]}}',
+						icon: '={{$parameter["taskStatusIcon"]}}'
 					}
 				},
 			},
