@@ -16,7 +16,9 @@ export const projectInputs: INodeProperties[] =
 						'gettaskstatuses',
 						'postprojectstatus',
 						'changeprojectstatus',
-						'posttaskstatus'
+						'posttaskstatus',
+						'gettasklists',
+						'posttasklist'
 					],
 				},
 			},

@@ -204,6 +204,18 @@ export const taskResource: INodeProperties =
 				},
 			},
 		},
+		// {
+		// 	name: 'Change Task Lists',
+		// 	value: 'postchangelists',
+		// 	action: 'Change task lists of a task',
+		// 	routing: {
+		// 		request: {
+		// 			method: 'POST',
+		// 			url: '=api/v1/tasks/changelists',
+		// 			body: '={{JSON.stringify({ "attachments": "" })}}'
+		// 		},
+		// 	},
+		// },
 	],
 	default: 'get',
 };

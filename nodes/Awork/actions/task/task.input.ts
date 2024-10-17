@@ -55,7 +55,7 @@ export const taskInputs: INodeProperties[] =
 						'addtag',
 						'changestatus',
 						'comments',
-						'settaskassignee'
+						'settaskassignee',
 					],
 				},
 			},
@@ -255,4 +255,23 @@ export const taskInputs: INodeProperties[] =
 			default: '',
 			description: 'The ID of the user'
 		},
+		// {
+		// 	displayName: 'Task Lists',
+		// 	name: 'taskLists',
+		// 	type: 'json',
+		// 	displayOptions: {
+		// 		show: {
+		// 			resource: [
+		// 				'projecttask',
+		// 			],
+		// 			operation: [
+		// 				'postchangelists',
+		// 			],
+		// 		},
+		// 	},
+		// 	default: '[{"taskId": "", "taskLists": [{"id": "", "order": 0}]}]]',
+		// 	// eslint-disable-next-line n8n-nodes-base/node-param-placeholder-miscased-id
+		// 	placeholder: '[{"taskId": "", "taskLists": [{"id": "", "order": 0}]}]]',
+		// 	description: 'The batch model to set the task list for the task',
+		// }
 	];

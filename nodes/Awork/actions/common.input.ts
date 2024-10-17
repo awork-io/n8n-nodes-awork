@@ -9,10 +9,12 @@ export const commonInputs: INodeProperties[] =
 			displayOptions: {
 				show: {
 					resource: [
+						'project',
 						'projecttask',
 					],
 					operation: [
 						'posttypeofwork',
+						'posttasklist'
 					],
 				},
 			},

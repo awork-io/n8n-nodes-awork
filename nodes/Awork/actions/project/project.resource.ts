@@ -110,6 +110,27 @@ export const projectResource: INodeProperties =
 			},
 		},
 		{
+			name: 'Get Task Lists of Project',
+			value: 'gettasklists',
+			action: 'Get task lists of project by id',
+			routing: {
+				request: {
+					method: 'GET',
+					url: '=api/v1/projects/{{$parameter["projectId"]}}/tasklists',
+					qs: {
+						filterBy: '={{$parameter["filterBy"] || undefined}}',
+						orderBy: '={{$parameter["orderBy"] || undefined}}',
+					},
+				},
+				operations: {
+					pagination: aworkApiPagination,
+				},
+				send: {
+					paginate: true,
+				}
+			},
+		},
+		{
 			name: 'Create Project Status',
 			value: 'postprojectstatus',
 			action: 'Create a project status',
@@ -153,6 +174,21 @@ export const projectResource: INodeProperties =
 						name: '={{$parameter["statusName"]}}',
 						type: '={{$parameter["statusType"]}}',
 						icon: '={{$parameter["taskStatusIcon"]}}'
+					}
+				},
+			},
+		},
+		{
+			name: 'Create Task List',
+			value: 'posttasklist',
+			action: 'Create a task list',
+			description: 'Create a task list for the project',
+			routing: {
+				request: {
+					method: 'POST',
+					url: '=api/v1/projects/{{$parameter["projectId"]}}/tasklists',
+					body: {
+						name: '={{$parameter["name"]}}'
 					}
 				},
 			},
