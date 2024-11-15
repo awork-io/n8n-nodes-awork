@@ -13,14 +13,15 @@ export const taskInputs: INodeProperties[] =
 					],
 					operation: [
 						'gettasksofproject',
-						'gettasklistsofproject'
+						'gettasklistsofproject',
+						'postaddtasktotasklist'
 					],
 				},
 			},
 			default: '',
 			placeholder: 'Enter the project ID',
 			required: true,
-			description: 'The ID of the project to retrieve tasks for',
+			description: 'The ID of the project',
 		},
 		{
 			displayName: 'Project ID',
@@ -37,7 +38,7 @@ export const taskInputs: INodeProperties[] =
 				},
 			},
 			default: '',
-			description: 'The ID of the project in which the task will be created',
+			description: 'The ID of the project',
 			required: true,
 		},
 		{
@@ -56,6 +57,7 @@ export const taskInputs: INodeProperties[] =
 						'changestatus',
 						'comments',
 						'settaskassignee',
+						'postaddtasktotasklist'
 					],
 				},
 			},
@@ -255,23 +257,21 @@ export const taskInputs: INodeProperties[] =
 			default: '',
 			description: 'The ID of the user'
 		},
-		// {
-		// 	displayName: 'Task Lists',
-		// 	name: 'taskLists',
-		// 	type: 'json',
-		// 	displayOptions: {
-		// 		show: {
-		// 			resource: [
-		// 				'projecttask',
-		// 			],
-		// 			operation: [
-		// 				'postchangelists',
-		// 			],
-		// 		},
-		// 	},
-		// 	default: '[{"taskId": "", "taskLists": [{"id": "", "order": 0}]}]]',
-		// 	// eslint-disable-next-line n8n-nodes-base/node-param-placeholder-miscased-id
-		// 	placeholder: '[{"taskId": "", "taskLists": [{"id": "", "order": 0}]}]]',
-		// 	description: 'The batch model to set the task list for the task',
-		// }
+		{
+			displayName: 'Task List ID',
+			name: 'taskListId',
+			type: 'string',
+			displayOptions: {
+				show: {
+					resource: [
+						'projecttask',
+					],
+					operation: [
+						'postaddtasktotasklist',
+					],
+				},
+			},
+			default: '',
+			description: 'The task list to move the task to',
+		}
 	];

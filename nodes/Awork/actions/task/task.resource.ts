@@ -204,18 +204,18 @@ export const taskResource: INodeProperties =
 				},
 			},
 		},
-		// {
-		// 	name: 'Change Task Lists',
-		// 	value: 'postchangelists',
-		// 	action: 'Change task lists of a task',
-		// 	routing: {
-		// 		request: {
-		// 			method: 'POST',
-		// 			url: '=api/v1/tasks/changelists',
-		// 			body: '={{JSON.stringify({ "attachments": "" })}}'
-		// 		},
-		// 	},
-		// },
+		{
+			name: 'Add Task to Task List',
+			value: 'postaddtasktotasklist',
+			action: 'Add a task to a task list',
+			routing: {
+				request: {
+					method: 'POST',
+					url: '=api/v1/projects/{{$parameter["projectId"]}}/tasklists/{{$parameter["taskListId"]}}/addtasks',
+					body: [{ taskId: '={{$parameter["taskId"]}}' }]
+				},
+			},
+		},
 	],
 	default: 'get',
 };
