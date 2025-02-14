@@ -169,7 +169,7 @@ export const taskInputs: INodeProperties[] =
 					],
 				},
 			},
-			default: '0',
+			default: 0,
 			description: 'The planned duration for the task in seconds'
 		},
 		{
