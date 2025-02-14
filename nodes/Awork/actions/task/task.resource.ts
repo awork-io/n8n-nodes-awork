@@ -64,6 +64,7 @@ export const taskResource: INodeProperties =
 						dueDate: '={{$parameter["dueDate"]}}', // Optional due date for the task
 						typeOfWorkId: '={{$parameter["typeOfWorkId"]}}', // Required type of work ID
 						taskStatusId: '={{$parameter["taskStatusId"]}}', // Required task status ID
+						plannedDuration: '={{$parameter["plannedDuration"]}}', // Optional planned duration for the task
 					}
 				},
 			},
