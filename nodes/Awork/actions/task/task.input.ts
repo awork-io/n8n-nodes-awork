@@ -156,6 +156,23 @@ export const taskInputs: INodeProperties[] =
 			description: 'The due date for the task'
 		},
 		{
+			displayName: 'Planned Duration',
+			name: 'plannedDuration',
+			type: 'number',
+			displayOptions: {
+				show: {
+					resource: [
+						'projecttask',
+					],
+					operation: [
+						'post',
+					],
+				},
+			},
+			default: '0',
+			description: 'The planned duration for the task in seconds'
+		},
+		{
 			displayName: 'Text Value',
 			name: 'textValue',
 			type: 'string',
