@@ -16,6 +16,32 @@ export const companyResource: INodeProperties =
 	},
 	options: [
 		{
+			name: 'Create Company',
+			value: 'create',
+			action: 'Create a company',
+			description: 'Create a company by sending company details',
+			routing: {
+				request: {
+					method: 'POST',
+					url: '=api/v1/companies',
+					body: {
+						name: '={{$parameter["name"]}}',
+						street: '={{$parameter["street"] || undefined}}',
+						city: '={{$parameter["city"] || undefined}}',
+						zip: '={{$parameter["zip"] || undefined}}',
+						country: '={{$parameter["country"] || undefined}}',
+						website: '={{$parameter["website"] || undefined}}',
+						phone: '={{$parameter["phone"] || undefined}}',
+						email: '={{$parameter["email"] || undefined}}',
+						industry: '={{$parameter["industry"] || undefined}}',
+						status: '={{$parameter["status"] || undefined}}',
+						tags: '={{$parameter["tags"] || undefined}}',
+						customFields: '={{$parameter["customFields"] || undefined}}',
+					},
+				},
+			},
+		},
+		{
 			name: 'Get All Companies',
 			value: 'getall',
 			action: 'Get companies',
