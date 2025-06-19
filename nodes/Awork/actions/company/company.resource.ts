@@ -16,6 +16,23 @@ export const companyResource: INodeProperties =
 	},
 	options: [
 		{
+			name: 'Create Company',
+			value: 'create',
+			action: 'Create a company',
+			description: 'Create a company by sending company details',
+			routing: {
+				request: {
+					method: 'POST',
+					url: '=api/v1/companies',
+					body: {
+						name: '={{$parameter["name"]}}',
+						industry: '={{$parameter["industry"] || undefined}}',
+						description: '={{$parameter["description"] || undefined}}',
+					},
+				},
+			},
+		},
+		{
 			name: 'Get All Companies',
 			value: 'getall',
 			action: 'Get companies',
