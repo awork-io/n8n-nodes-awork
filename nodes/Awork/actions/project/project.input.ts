@@ -130,7 +130,23 @@ export const projectInputs: INodeProperties[] =
 			},
 			default: undefined,
 			description: 'The project status ID for the project',
-			required: true,
+		},
+		{
+			displayName: 'Project Template ID',
+			name: 'projectTemplateId',
+			type: 'string',
+			displayOptions: {
+				show: {
+					resource: [
+						'project',
+					],
+					operation: [
+						'post',
+					],
+				},
+			},
+			default: '',
+			description: 'The project template ID to use for the project',
 		},
 		{
 			displayName: 'Status Name',

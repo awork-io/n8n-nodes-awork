@@ -85,6 +85,7 @@ export const projectResource: INodeProperties =
 						projectTypeId: '={{$parameter["projectTypeId"] || undefined}}',
 						projectStatusId: '={{$parameter["projectStatusId"] || undefined}}',
 						companyId: '={{$parameter["companyId"] || undefined}}',
+						projectTemplateId: '={{$parameter["projectTemplateId"] || undefined}}',
 					}
 				},
 			},
