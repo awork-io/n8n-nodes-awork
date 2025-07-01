@@ -1,6 +1,4 @@
-import { DeclarativeRestApiSettings, IExecutePaginationFunctions, INodeExecutionData } from "n8n-workflow";
-
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+import { DeclarativeRestApiSettings, IExecutePaginationFunctions, INodeExecutionData, sleep } from "n8n-workflow";
 
 export async function aworkApiPagination(
 	this: IExecutePaginationFunctions,
