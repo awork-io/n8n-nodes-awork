@@ -202,4 +202,21 @@ export const projectInputs: INodeProperties[] =
 			default: undefined,
 			required: true,
 		},
+		{
+			displayName: 'Company ID',
+			name: 'companyId',
+			type: 'string',
+			displayOptions: {
+				show: {
+					resource: [
+						'project',
+					],
+					operation: [
+						'post',
+					],
+				},
+			},
+			default: '',
+			description: 'The ID of the company to associate the project with',
+		},
 	];
