@@ -25,9 +25,9 @@ export const companyResource: INodeProperties =
 					method: 'POST',
 					url: '=api/v1/companies',
 					body: {
-						name: '={{$parameter["name"]}}',
-						industry: '={{$parameter["industry"] || undefined}}',
-						description: '={{$parameter["description"] || undefined}}',
+						name: '={{$parameter["companyName"]}}',
+						industry: '={{$parameter["companyIndustry"] || undefined}}',
+						description: '={{$parameter["companyDescription"] || undefined}}',
 					},
 				},
 			},
