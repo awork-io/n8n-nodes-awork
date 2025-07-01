@@ -31,7 +31,7 @@ export const companyInputs: INodeProperties[] =
 						'company',
 					],
 					operation: [
-						'post',
+						'create',
 					],
 				},
 			},
@@ -50,7 +50,7 @@ export const companyInputs: INodeProperties[] =
 						'company',
 					],
 					operation: [
-						'post',
+						'create',
 					],
 				},
 			},
@@ -67,7 +67,7 @@ export const companyInputs: INodeProperties[] =
 						'company',
 					],
 					operation: [
-						'post',
+						'create',
 					],
 				},
 			},
