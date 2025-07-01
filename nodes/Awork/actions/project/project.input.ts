@@ -112,7 +112,6 @@ export const projectInputs: INodeProperties[] =
 			},
 			default: undefined,
 			description: 'The project type ID for the project',
-			required: true,
 		},
 		{
 			displayName: 'Project Status ID',
