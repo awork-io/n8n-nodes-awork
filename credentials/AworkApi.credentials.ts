@@ -2,6 +2,7 @@ import {
 	ICredentialType,
 	INodeProperties,
 	IAuthenticateGeneric,
+	ICredentialTestRequest,
 } from 'n8n-workflow';
 
 export class AworkApi implements ICredentialType {
@@ -26,6 +27,14 @@ export class AworkApi implements ICredentialType {
 			headers: {
 				Authorization: '=Bearer {{$credentials.apiKey}}'
 			},
+		},
+	};
+
+	// The block below tells how this credential can be tested
+	test: ICredentialTestRequest = {
+		request: {
+			baseURL: 'https://api.awork.com',
+			url: '/api/v1/users/me',
 		},
 	};
 }
