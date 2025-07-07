@@ -20,6 +20,7 @@ export class Awork implements INodeType {
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
 		description: 'Automate your workflows with the awork API',
+		usableAsTool: true,
 		defaults: {
 			name: 'awork',
 		},

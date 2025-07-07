@@ -1,4 +1,4 @@
-import { ICredentialDataDecryptedObject, IDataObject, IHookFunctions, IHttpRequestMethods, INodeType, INodeTypeDescription, IRequestOptions, IWebhookFunctions, IWebhookResponseData, NodeOperationError } from 'n8n-workflow';
+import { IDataObject, IHookFunctions, IHttpRequestMethods, INodeType, INodeTypeDescription, IHttpRequestOptions, IWebhookFunctions, IWebhookResponseData, NodeOperationError } from 'n8n-workflow';
 export class AworkTrigger implements INodeType {
 	description: INodeTypeDescription = {
 		// Basic node details
@@ -228,7 +228,6 @@ export class AworkTrigger implements INodeType {
 	webhookMethods = {
 		default: {
 			async checkExists(this: IHookFunctions): Promise<boolean> {
-				const credentials = await this.getCredentials('aworkApi') as ICredentialDataDecryptedObject;
 				const webhookData = this.getWorkflowStaticData('node');
 
 				if (webhookData.webhookId === undefined) {
@@ -237,17 +236,14 @@ export class AworkTrigger implements INodeType {
 					return false;
 				}
 
-				const options: IRequestOptions = {
+				const options: IHttpRequestOptions = {
 					method: 'GET' as IHttpRequestMethods,
 					url: `https://api.awork.com/api/v1/webhooks/${webhookData.webhookId}`,
-					headers: {
-						Authorization: `Bearer ${credentials.apiKey}`,
-					},
 					json: true,
 				};
 
 				try {
-					await this.helpers.request!(options);
+					await this.helpers.requestWithAuthentication!.call(this, 'aworkApi', options);
 				} catch (error) {
 					if (error.status === 404) {
 						// Webhook does not exist
@@ -266,7 +262,6 @@ export class AworkTrigger implements INodeType {
 				return true;
 			},
 			async create(this: IHookFunctions): Promise<boolean> {
-				const credentials = await this.getCredentials('aworkApi') as ICredentialDataDecryptedObject;
 				const workflow = this.getWorkflow();
 				const webhookUrl = this.getNodeWebhookUrl('default') as string;
 				const events = this.getNodeParameter('events', []) as string[];
@@ -291,11 +286,10 @@ export class AworkTrigger implements INodeType {
 					authenticationType: 'none',
 				};
 
-				const options: IRequestOptions = {
+				const options: IHttpRequestOptions = {
 					method: 'POST' as IHttpRequestMethods,
 					url: 'https://api.awork.com/api/v1/webhooks',
 					headers: {
-						Authorization: `Bearer ${credentials.apiKey}`,
 						'Content-Type': 'application/json',
 					},
 					body,
@@ -303,7 +297,7 @@ export class AworkTrigger implements INodeType {
 				};
 
 				try {
-					const responseData = await this.helpers.request!(options);
+					const responseData = await this.helpers.requestWithAuthentication!.call(this, 'aworkApi', options);
 					this.logger.debug('Webhook created');
 					this.logger.debug(JSON.stringify(responseData))
 
@@ -318,17 +312,13 @@ export class AworkTrigger implements INodeType {
 				}
 			},
 			async delete(this: IHookFunctions): Promise<boolean> {
-				const credentials = await this.getCredentials('aworkApi') as ICredentialDataDecryptedObject;
 				const webhookData = this.getWorkflowStaticData('node');
 
 				this.logger.debug('Deleting webhook');
 
-				const options: IRequestOptions = {
+				const options: IHttpRequestOptions = {
 					method: 'DELETE' as IHttpRequestMethods,
 					url: `https://api.awork.com/api/v1/webhooks/${webhookData.webhookId}`,
-					headers: {
-						Authorization: `Bearer ${credentials.apiKey}`,
-					},
 					json: true,
 				};
 
@@ -338,7 +328,7 @@ export class AworkTrigger implements INodeType {
 				delete webhookData.webhookEvents;
 
 				try {
-					await this.helpers.request!(options);
+					await this.helpers.requestWithAuthentication!.call(this, 'aworkApi', options);
 					this.logger.info('Webhook deleted');
 					return true;
 				} catch (error) {
