@@ -1,4 +1,4 @@
-import { INodeType, INodeTypeDescription } from 'n8n-workflow';
+import { INodeType, INodeTypeDescription, NodeConnectionType } from 'n8n-workflow';
 import { commonProperties } from './common.properties';
 import { projectResource } from './actions/project/project.resource';
 import { projectInputs } from './actions/project/project.input';
@@ -24,8 +24,8 @@ export class Awork implements INodeType {
 		defaults: {
 			name: 'awork',
 		},
-		inputs: ['main'],
-		outputs: ['main'],
+		inputs: [NodeConnectionType.Main],
+		outputs: [NodeConnectionType.Main],
 		credentials: [
 			{
 				name: 'aworkApi',

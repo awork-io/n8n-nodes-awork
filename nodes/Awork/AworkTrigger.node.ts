@@ -1,4 +1,4 @@
-import { IDataObject, IHookFunctions, IHttpRequestMethods, INodeType, INodeTypeDescription, IHttpRequestOptions, IWebhookFunctions, IWebhookResponseData, NodeOperationError } from 'n8n-workflow';
+import { IDataObject, IHookFunctions, IHttpRequestMethods, INodeType, INodeTypeDescription, IHttpRequestOptions, IWebhookFunctions, IWebhookResponseData, NodeOperationError, NodeConnectionType } from 'n8n-workflow';
 export class AworkTrigger implements INodeType {
 	description: INodeTypeDescription = {
 		// Basic node details
@@ -13,7 +13,7 @@ export class AworkTrigger implements INodeType {
 			name: 'awork Trigger',
 		},
 		inputs: [],
-		outputs: ['main'],
+		outputs: [NodeConnectionType.Main],
 		credentials: [
 			{
 				name: 'aworkApi',
