@@ -1,43 +1,121 @@
 # n8n-nodes-awork
 
-This repo contains the awork n8n nodes to automate workflows with [awork](awork.com) in [n8n](n8n.io). This is based on the starter node repository.
+This is an n8n community node that lets you automate workflows with [awork](https://www.awork.com/), a modern project management tool. It provides seamless integration between awork and n8n, allowing you to manage projects, tasks, and company/client data within your automation workflows.
 
-To learn more about the awork API, check out our [Developer Docs](https://developers.awork.com/).
+## Installation
 
-## Prerequisites
+### n8n Cloud
+1. Select **+** on your canvas and type **awork**
+2. Find **awork** in the **More from the community** section
+3. Select **install**
 
-You need the following installed on your development machine:
+Follow the [official installation guide](https://docs.n8n.io/integrations/community-nodes/installation/verified-install/) for n8n community nodes.
 
-* [git](https://git-scm.com/downloads)
-* Node.js and pnpm. Minimum version Node 18. You can find instructions on how to install both using nvm (Node Version Manager) for Linux, Mac, and WSL [here](https://github.com/nvm-sh/nvm). For Windows users, refer to Microsoft's guide to [Install NodeJS on Windows](https://docs.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-windows).
-* Install n8n with:
+### Self-Hosted Instance
+1. Navigate to **Settings > Community Nodes**
+2. Select **Install**
+3. Enter `n8n-nodes-awork` in **Enter npm package name**
+4. Select **Install**
+5. **Restart your n8n instance** after installation
 
-  ```sh
-  pnpm install n8n -g
-  ```
+## Authentication
 
-* Recommended: follow n8n's guide to [set up your development environment](https://docs.n8n.io/integrations/creating-nodes/build/node-development-environment/).
+To use the awork node, you'll need API credentials from awork:
 
-## Testing the node
+1. **Create an awork account** at [awork.com](https://www.awork.com/) if you don't have one
+2. **Generate an API key** by following the instructions in the [awork API Authentication documentation](https://developers.awork.com/authentication#api-key)
+3. **In n8n**, add new credentials:
+   - Select **"awork API"** from the credentials list
+   - Enter your API key
+   - Test the connection to ensure it's working
 
-In the node's source folder, run:
+## Available Operations
 
-```sh
-pnpm run build && pnpm link --global
-```
+The awork node provide comprehensive access to awork's project management features, including:
 
-Navigate to the custom nodes folder of your local n8n instance, usually `~/.n8n/custom`, and run (only required once):
+### Projects
+- **Create Project**: Start new projects with custom settings
+- **Get Project**: Retrieve project information
+- **List Projects**: Get all projects with filtering options
+- **Change Project Status**: Changes the status of a project
 
-```sh
-npm link n8n-nodes-awork
-```
+### Tasks
+- **Create Task**: Add new tasks to projects
+- **Get Task**: Retrieve specific task information
+- **List Tasks**: Get tasks with advanced filtering
+- **Change Task Status**: Changes the status of a task
+- **Set Task Custom Fields**: Sets the value of a task custom field
+- **Add Task Comment**: Adds a comment to a task
 
-Then start n8n:
+### Companies
+- **Create Company**: Add new companies to your workspace
+- **Get Company**: Retrieve company details
+- **List Companies**: Get all companies with filtering
 
-```sh
-n8n start
-```
+### Users
+- **List Users**: Get all users with filtering
 
-## More information
+### Other
+- **HTTP**: With a generic HTTP Request, any awork API endpoint can be used
 
-Refer to the [documentation on creating nodes](https://docs.n8n.io/integrations/creating-nodes/) for detailed information on building custom nodes.
+For detailed information about each operation and its parameters, visit the relevant sections in the [awork Developer Documentation](https://developers.awork.com/):
+- [Projects](https://developers.awork.com/projects)
+- [Tasks](https://developers.awork.com/tasks)
+- [Companies](https://developers.awork.com/companies)
+- [Users](https://developers.awork.com/users)
+
+## Example Workflows
+
+Here are some common use cases for the awork nodes:
+
+1. **Automated Project Creation**: Create projects in awork when new deals are won in your CRM
+2. **Task Synchronization**: Sync tasks between awork and other project management tools
+3. **Company Management**: Automatically create companies in awork from form submissions
+4. **Status Updates**: Update task statuses based on external triggers
+5. **Reporting**: Extract project and task data for custom reporting dashboards
+
+## Resources
+
+- **awork Developer Documentation**: [developers.awork.com](https://developers.awork.com/)
+- **awork Developer Forum**: [community.awork.com/c/developer-forum/17](https://community.awork.com/c/developer-forum/17)
+- **n8n Documentation**: [docs.n8n.io](https://docs.n8n.io/)
+- **n8n Community**: [community.n8n.io](https://community.n8n.io/)
+
+## Support
+
+If you encounter any issues or have questions:
+
+- Check the [awork Developer Forum](https://community.awork.com/c/developer-forum/17) for API-related questions
+- Visit the [n8n Community Forum](https://community.n8n.io/) for n8n-specific issues
+
+## Local Development
+
+For contributors and developers who want to test changes locally:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/awork-io/n8n-nodes-awork
+   cd n8n-nodes-awork
+   ```
+
+2. Install dependencies and build:
+   ```bash
+   pnpm install
+   pnpm run build
+   ```
+
+3. Link to your local n8n installation:
+   ```bash
+   pnpm link --global
+   cd ~/.n8n/custom
+   pnpm link n8n-nodes-awork
+   ```
+
+4. Start n8n:
+   ```bash
+   n8n start
+   ```
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
