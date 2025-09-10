@@ -195,6 +195,28 @@ export const projectResource: INodeProperties =
 				},
 			},
 		},
+		{
+			name: 'Get Comments',
+			value: 'getcomments',
+			action: 'Get comments of project',
+			description: 'Get comments of a project by project ID',
+			routing: {
+				request: {
+					method: 'GET',
+					url: '=api/v1/projects/{{$parameter["projectId"]}}/comments',
+					qs: {
+						filterBy: '={{$parameter["filterBy"] || undefined}}',
+						orderBy: '={{$parameter["orderBy"] || undefined}}',
+					},
+				},
+				operations: {
+					pagination: aworkApiPagination,
+				},
+				send: {
+					paginate: true,
+				}
+			},
+		},
 	],
 	default: 'get',
 };

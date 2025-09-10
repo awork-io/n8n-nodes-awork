@@ -217,6 +217,28 @@ export const taskResource: INodeProperties =
 				},
 			},
 		},
+		{
+			name: 'Get Comments',
+			value: 'getcomments',
+			action: 'Get comments of task',
+			description: 'Get comments of a task by task ID',
+			routing: {
+				request: {
+					method: 'GET',
+					url: '=api/v1/tasks/{{$parameter["taskId"]}}/comments',
+					qs: {
+						filterBy: '={{$parameter["filterBy"] || undefined}}',
+						orderBy: '={{$parameter["orderBy"] || undefined}}',
+					},
+				},
+				operations: {
+					pagination: aworkApiPagination,
+				},
+				send: {
+					paginate: true,
+				}
+			},
+		},
 	],
 	default: 'get',
 };
