@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-awork",
-  "version": "0.1.53",
+  "version": "0.1.54",
   "description": "Automate your workflows with the awork API",
   "keywords": [
     "n8n-community-node-package",
