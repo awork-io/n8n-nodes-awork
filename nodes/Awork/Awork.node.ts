@@ -8,6 +8,8 @@ import { userResource } from './actions/user/user.resource';
 import { userInputs } from './actions/user/user.input';
 import { companyResource } from './actions/company/company.resource';
 import { companyInputs } from './actions/company/company.input';
+import { documentResource } from './actions/document/document.resource';
+import { documentInputs } from './actions/document/document.input';
 import { commonInputs } from './actions/common.input';
 
 export class Awork implements INodeType {
@@ -49,6 +51,14 @@ export class Awork implements INodeType {
 				noDataExpression: true,
 				options: [
 					{
+						name: 'Company',
+						value: 'company',
+					},
+					{
+						name: 'Document',
+						value: 'document',
+					},
+					{
 						name: 'Project',
 						value: 'project',
 					},
@@ -59,10 +69,6 @@ export class Awork implements INodeType {
 					{
 						name: 'User',
 						value: 'user',
-					},
-					{
-						name: 'Company',
-						value: 'company',
 					},
 				],
 				default: 'project',
@@ -79,6 +85,9 @@ export class Awork implements INodeType {
 			// Operations for the Company resource
 			companyResource,
 			...companyInputs,
+			// Operations for the Document resource
+			documentResource,
+			...documentInputs,
 			// Common inputs such as name, description, type, etc.
 			...commonInputs,
 			// Optional fields for pagination and filtering
