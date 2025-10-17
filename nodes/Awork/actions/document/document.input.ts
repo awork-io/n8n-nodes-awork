@@ -58,7 +58,6 @@ export const documentInputs: INodeProperties[] =
 			},
 			default: '',
 			placeholder: 'Enter the document space ID',
-			required: false,
 			description: 'The ID of the document space where the document will be created. Either documentSpaceId or projectId must be provided.',
 		},
 		{
@@ -77,7 +76,6 @@ export const documentInputs: INodeProperties[] =
 			},
 			default: '',
 			placeholder: 'Enter the project ID',
-			required: false,
 			description: 'The ID of the project where the document will be created. Either documentSpaceId or projectId must be provided.',
 		},
 		{
