@@ -60,11 +60,11 @@ export const taskResource: INodeProperties =
 						baseType: 'projecttask',
 						entityId: '={{$parameter["projectId"]}}', // ID of the project the task belongs to
 						name: '={{$parameter["taskName"]}}',     // Task name
-						description: '={{$parameter["taskDescription"]}}',  // Optional task description
-						dueOn: '={{$parameter["dueDate"]}}', // Optional due date for the task
-						typeOfWorkId: '={{$parameter["typeOfWorkId"]}}', // Required type of work ID
-						taskStatusId: '={{$parameter["taskStatusId"]}}', // Required task status ID
-						plannedDuration: '={{$parameter["plannedDuration"]}}', // Optional planned duration for the task
+						description: '={{$parameter["taskDescription"] || undefined}}',  // Optional task description
+						dueOn: '={{$parameter["dueDate"] || undefined}}', // Optional due date for the task
+						typeOfWorkId: '={{$parameter["typeOfWorkId"] || undefined}}', // Optional type of work ID
+						taskStatusId: '={{$parameter["taskStatusId"] || undefined}}', // Optional task status ID
+						plannedDuration: '={{$parameter["plannedDuration"] || undefined}}', // Optional planned duration for the task
 					}
 				},
 			},
