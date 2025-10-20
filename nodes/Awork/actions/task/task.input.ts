@@ -118,7 +118,6 @@ export const taskInputs: INodeProperties[] =
 			},
 			default: '',
 			description: 'The type of work ID for the task',
-			required: true,
 		},
 		{
 			displayName: 'Task Status ID',
@@ -136,7 +135,6 @@ export const taskInputs: INodeProperties[] =
 			},
 			default: '',
 			description: 'The task status ID for the task',
-			required: true,
 		},
 		{
 			displayName: 'Due Date',
