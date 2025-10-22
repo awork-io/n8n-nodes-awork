@@ -39,7 +39,8 @@
       "dist/credentials/AworkApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/Awork/Awork.node.js"
+      "dist/nodes/Awork/Awork.node.js",
+      "dist/nodes/Awork/AworkTrigger.node.js"
     ]
   },
   "devDependencies": {
