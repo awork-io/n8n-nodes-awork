@@ -99,7 +99,7 @@ export const taskInputs: INodeProperties[] =
 					],
 				},
 			},
-			default: '',
+			default: undefined,
 			description: 'The description of the task'
 		},
 		{
@@ -116,7 +116,7 @@ export const taskInputs: INodeProperties[] =
 					],
 				},
 			},
-			default: '',
+			default: undefined,
 			description: 'The type of work ID for the task',
 		},
 		{
@@ -133,7 +133,7 @@ export const taskInputs: INodeProperties[] =
 					],
 				},
 			},
-			default: '',
+			default: undefined,
 			description: 'The task status ID for the task',
 		},
 		{
@@ -150,7 +150,7 @@ export const taskInputs: INodeProperties[] =
 					],
 				},
 			},
-			default: '',
+			default: undefined,
 			description: 'The due date for the task'
 		},
 		{
@@ -167,7 +167,7 @@ export const taskInputs: INodeProperties[] =
 					],
 				},
 			},
-			default: 0,
+			default: undefined,
 			description: 'The planned duration for the task in seconds'
 		},
 		{
