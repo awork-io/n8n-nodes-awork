@@ -57,7 +57,8 @@ export const taskInputs: INodeProperties[] =
 						'changestatus',
 						'comments',
 						'settaskassignee',
-						'postaddtasktotasklist'
+						'postaddtasktotasklist',
+						'getcomments'
 					],
 				},
 			},
