@@ -100,15 +100,15 @@ For contributors and developers who want to test changes locally:
 
 2. Install dependencies and build:
    ```bash
-   pnpm install
-   pnpm run build
+   npm install
+   npm run build
    ```
 
 3. Link to your local n8n installation:
    ```bash
-   pnpm link --global
+   npm link
    cd ~/.n8n/custom
-   pnpm link n8n-nodes-awork
+   npm link n8n-nodes-awork
    ```
 
 4. Start n8n:

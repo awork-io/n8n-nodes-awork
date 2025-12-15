@@ -5,25 +5,30 @@ on:
     branches:
       - main
 
+permissions:
+  id-token: write
+  contents: write
+
 jobs:
   publish:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout the repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org/'
+          cache: 'npm'
 
-      - name: Install pnpm
-        run: npm install -g pnpm@9.1
+      - name: Update npm
+        run: npm install -g npm@latest
 
       - name: Install dependencies
-        run: pnpm install
+        run: npm ci
 
       - name: Set git config for version bump commit
         run: |
@@ -34,15 +39,11 @@ jobs:
         run: |
           current_version=$(node -p "require('./package.json').version")
           echo "Current version: $current_version"
-          pnpm version patch
+          npm version patch
 
       - name: Push version bump to repo
         run: |
-          git push origin main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          git push --follow-tags origin main
 
       - name: Publish to npm
-        run: pnpm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_AWORK }}
+        run: npm publish --provenance --access public
