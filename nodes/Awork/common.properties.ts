@@ -15,6 +15,7 @@ export const commonProperties: INodeProperties[] = [
 				],
 				operation: [
 					'getall',
+					'getprojectstatusesofproject',
 					'gettasksofproject',
 					'gettypesofwork',
 					'gettaskstatuses',
@@ -40,6 +41,7 @@ export const commonProperties: INodeProperties[] = [
 				],
 				operation: [
 					'getall',
+					'getprojectstatusesofproject',
 					'gettasksofproject',
 					'gettypesofwork',
 					'gettaskstatuses',
@@ -66,6 +68,7 @@ export const commonProperties: INodeProperties[] = [
 				],
 				operation: [
 					'getall',
+					'getprojectstatusesofproject',
 					'gettasksofproject',
 					'gettypesofwork',
 					'gettaskstatuses',

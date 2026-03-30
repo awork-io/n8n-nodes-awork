@@ -50,11 +50,32 @@ export const projectResource: INodeProperties =
 		{
 			name: 'Get All Project Statuses',
 			value: 'getprojectstatuses',
-			action: 'Get projects statuses',
+			action: 'Get all project statuses',
 			routing: {
 				request: {
 					method: 'GET',
 					url: '=api/v1/projectstatuses',
+					qs: {
+						filterBy: '={{$parameter["filterBy"] || undefined}}',
+						orderBy: '={{$parameter["orderBy"] || undefined}}',
+					},
+				},
+				operations: {
+					pagination: aworkApiPagination,
+				},
+				send: {
+					paginate: true,
+				}
+			},
+		},
+		{
+			name: 'Get Project Statuses of Project',
+			value: 'getprojectstatusesofproject',
+			action: 'Get project statuses of project by id',
+			routing: {
+				request: {
+					method: 'GET',
+					url: '=api/v1/projects/{{$parameter["projectId"]}}/projectstatuses',
 					qs: {
 						filterBy: '={{$parameter["filterBy"] || undefined}}',
 						orderBy: '={{$parameter["orderBy"] || undefined}}',
