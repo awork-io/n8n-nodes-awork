@@ -1,17 +1,14 @@
 import { INodeProperties } from 'n8n-workflow';
 import { aworkApiPagination } from '../../GenericFunctions';
 
-export const companyResource: INodeProperties =
-{
+export const companyResource: INodeProperties = {
 	displayName: 'Operation',
 	name: 'operation',
 	type: 'options',
 	noDataExpression: true,
 	displayOptions: {
 		show: {
-			resource: [
-				'company',
-			],
+			resource: ['company'],
 		},
 	},
 	options: [
@@ -50,7 +47,7 @@ export const companyResource: INodeProperties =
 				},
 				send: {
 					paginate: true,
-				}
+				},
 			},
 		},
 		{
@@ -60,8 +57,36 @@ export const companyResource: INodeProperties =
 			routing: {
 				request: {
 					method: 'GET',
-					url: '=api/v1/companies/{{$parameter["companyId"]}}'
-				}
+					url: '=api/v1/companies/{{$parameter["companyId"]}}',
+				},
+			},
+		},
+		{
+			name: 'Update Company',
+			value: 'update',
+			action: 'Update company',
+			routing: {
+				request: {
+					method: 'PUT',
+					url: '=api/v1/companies/{{$parameter["companyId"]}}',
+					body: '={{ { ...$parameter["updateFields"], name: $parameter["companyName"] } }}',
+				},
+			},
+		},
+		{
+			name: 'Delete Company',
+			value: 'delete',
+			action: 'Delete company',
+			routing: {
+				request: {
+					method: 'POST',
+					url: '=api/v1/companies/{{$parameter["companyId"]}}/delete',
+					body: {
+						deleteOperation: '={{$parameter["deleteOperation"]}}',
+						moveToCompany:
+							'={{$parameter["deleteOperation"] === "move" ? $parameter["moveToCompany"] : undefined}}',
+					},
+				},
 			},
 		},
 	],

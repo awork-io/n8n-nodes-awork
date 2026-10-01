@@ -21,6 +21,7 @@
   },
   "main": "index.js",
   "scripts": {
+    "test": "npm run build && node --test tests/*.test.js",
     "build": "npx rimraf dist && tsc && gulp build:icons",
     "dev": "tsc --watch",
     "format": "prettier nodes credentials --write",

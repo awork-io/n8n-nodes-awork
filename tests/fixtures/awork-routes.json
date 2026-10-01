@@ -1,0 +1,145 @@
+{
+  "source": "https://api.awork.com/openapi/v1",
+  "paths": {
+    "/projects": [
+      "get",
+      "post"
+    ],
+    "/projects/{projectId}": [
+      "get",
+      "put"
+    ],
+    "/projectstatuses": [
+      "get"
+    ],
+    "/projects/{projectId}/projectstatuses": [
+      "get",
+      "post"
+    ],
+    "/projects/{projectId}/taskstatuses": [
+      "get",
+      "post"
+    ],
+    "/projects/{projectId}/tasklists": [
+      "get",
+      "post"
+    ],
+    "/projects/{projectId}/changestatus": [
+      "post"
+    ],
+    "/projects/{projectId}/comments": [
+      "delete",
+      "get",
+      "post"
+    ],
+    "/projects/{projectId}/delete": [
+      "post"
+    ],
+    "/projects/{projectId}/tasklists/{taskListId}": [
+      "get",
+      "put"
+    ],
+    "/projects/{projectId}/tasklists/{taskListId}/delete": [
+      "post"
+    ],
+    "/projects/{projectId}/projecttasks": [
+      "get"
+    ],
+    "/tasks/{taskId}": [
+      "get",
+      "put"
+    ],
+    "/tasks": [
+      "post"
+    ],
+    "/tasks/{taskId}/setcustomfields": [
+      "post"
+    ],
+    "/tasks/{taskId}/addtags": [
+      "post"
+    ],
+    "/tasks/changestatuses": [
+      "post"
+    ],
+    "/tasks/{taskId}/comments": [
+      "delete",
+      "get",
+      "post"
+    ],
+    "/tasks/{taskId}/setassignees": [
+      "post"
+    ],
+    "/typeofwork": [
+      "get",
+      "post"
+    ],
+    "/projects/{projectId}/tasklists/{taskListId}/addtasks": [
+      "post"
+    ],
+    "/tasks/delete": [
+      "post"
+    ],
+    "/users": [
+      "get"
+    ],
+    "/users/{userId}": [
+      "delete",
+      "get",
+      "put"
+    ],
+    "/companies": [
+      "get",
+      "post"
+    ],
+    "/companies/{companyId}": [
+      "get",
+      "put"
+    ],
+    "/companies/{companyId}/delete": [
+      "post"
+    ],
+    "/documents": [
+      "get",
+      "post"
+    ],
+    "/documents/{documentId}": [
+      "delete",
+      "get",
+      "put"
+    ],
+    "/documents/{documentId}/content": [
+      "get",
+      "put"
+    ],
+    "/documentspaces/{documentSpaceId}/documents": [
+      "get"
+    ],
+    "/projects/{projectId}/documents": [
+      "get"
+    ],
+    "/documentspaces": [
+      "get",
+      "post"
+    ],
+    "/documentspaces/{documentSpaceId}": [
+      "delete",
+      "get",
+      "put"
+    ],
+    "/timeentries": [
+      "get",
+      "post"
+    ],
+    "/timeentries/{timeEntryId}": [
+      "delete",
+      "get",
+      "put"
+    ],
+    "/projects/{projectId}/timeentries": [
+      "get"
+    ],
+    "/tasks/{taskId}/timeentries": [
+      "get"
+    ]
+  }
+}
