@@ -1,56 +1,15 @@
 const assert = require('node:assert/strict');
 const { test } = require('node:test');
-const { Workflow, NodeHelpers } = require('n8n-workflow');
-const { Awork } = require('../dist/nodes/Awork/Awork.node');
+const { NodeHelpers } = require('n8n-workflow');
+const { properties, resources, evaluate, visible } = require('./helpers');
 const { aworkApiPagination } = require('../dist/nodes/Awork/GenericFunctions');
 const {
 	documentMultipartRequest,
 } = require('../dist/nodes/Awork/actions/document/document.helpers');
 const { paths } = require('./fixtures/awork-routes.json');
 
-const awork = new Awork();
-const properties = awork.description.properties;
-const resources = properties.filter((property) => property.name === 'operation');
-function operation(resource, value) {
-	const options = resources.find((property) =>
-		property.displayOptions.show.resource.includes(resource),
-	);
-	const selected = options.options.find((option) => option.value === value);
-	assert.ok(selected, `${resource}/${value} exists`);
-	return selected;
-}
-function evaluate(resource, value, parameters = {}) {
-	const workflow = new Workflow({
-		nodes: [{ name: 'awork', type: 'awork', typeVersion: 1, position: [0, 0], parameters: {} }],
-		connections: {},
-		active: false,
-		nodeTypes: { getByNameAndVersion: () => awork },
-	});
-	// Supply execution parameters directly, so missing optional fields stay absent.
-	workflow.nodes.awork.parameters = { resource, operation: value, ...parameters };
-	return workflow.expression.getParameterValue(
-		operation(resource, value).routing.request,
-		null,
-		0,
-		0,
-		'awork',
-		[{ json: {} }],
-		'manual',
-		{},
-	);
-}
-function visible(name, resource, operationValue) {
-	return properties.some(
-		(property) =>
-			property.name === name &&
-			NodeHelpers.displayParameter(
-				{ resource, operation: operationValue, returnAll: false },
-				property,
-			),
-	);
-}
-
 test('every declared HTTP method and path exists in the OpenAPI contract', () => {
+	const normalize = (path) => path.replace(/\{[^}]+\}/g, '{id}');
 	for (const resourceProperty of resources) {
 		const resource = resourceProperty.displayOptions.show.resource[0];
 		for (const option of resourceProperty.options) {
@@ -58,27 +17,38 @@ test('every declared HTTP method and path exists in the OpenAPI contract', () =>
 			const parameterNames = [
 				...route.url.matchAll(/\$parameter(?:\["([^"]+)"\]|\.([a-zA-Z]+))/g),
 			].map((match) => match[1] || match[2]);
-			const parameters = Object.fromEntries(parameterNames.map((name) => [name, `{${name}}`]));
-			const request = evaluate(resource, option.value, parameters);
-			const path = request.url.replace(/^\/?api\/v1/, '');
-			assert.ok(
-				paths[path]?.includes(request.method.toLowerCase()),
-				`${resource}/${option.value}: ${request.method} ${path}`,
+			const parentSelector = properties.find(
+				(p) => p.name === 'parentType' && p.displayOptions.show.resource.includes(resource),
 			);
-			for (const name of parameterNames) {
+			const parentTypes = parentSelector ? parentSelector.options.map((o) => o.value) : [undefined];
+			for (const parentType of parentTypes) {
+				if (
+					option.displayOptions?.show?.parentType &&
+					!option.displayOptions.show.parentType.includes(parentType)
+				)
+					continue;
+				const parameters = Object.fromEntries(parameterNames.map((name) => [name, `{${name}}`]));
+				if (parentType) parameters.parentType = parentType;
+				const request = evaluate(resource, option.value, parameters);
+				const path = request.url.replace(/^\/?api\/v1/, '');
+				const contractPath = Object.keys(paths).find((p) => normalize(p) === normalize(path));
 				assert.ok(
-					visible(name, resource, option.value),
-					`${resource}/${option.value} exposes ${name}`,
+					paths[contractPath]?.includes(request.method.toLowerCase()),
+					`${resource}/${option.value}: ${request.method} ${path}`,
 				);
-			}
-			if (option.routing.send?.paginate) {
-				for (const name of ['returnAll', 'filterBy', 'orderBy']) {
+				for (const name of parameterNames)
 					assert.ok(
-						visible(name, resource, option.value),
+						visible(name, resource, option.value, parameters),
 						`${resource}/${option.value} exposes ${name}`,
 					);
+				if (option.routing.send?.paginate) {
+					for (const name of ['returnAll', 'filterBy', 'orderBy'])
+						assert.ok(
+							visible(name, resource, option.value, parameters),
+							`${resource}/${option.value} exposes ${name}`,
+						);
+					assert.equal(option.routing.operations.pagination, aworkApiPagination);
 				}
-				assert.equal(option.routing.operations.pagination, aworkApiPagination);
 			}
 		}
 	}
@@ -235,23 +205,53 @@ test('document creation multipart preserves optional false and zero, and omits a
 });
 
 test('delete operations preserve related objects by default and honor explicit deletion choices', () => {
-	const defaultValue = (name, resource, value) => properties.find((property) => property.name === name &&
-		NodeHelpers.displayParameter({ resource, operation: value }, property)).default;
-	for (const [resource, idName] of [['project', 'projectId'], ['projecttask', 'taskId']]) {
+	const defaultValue = (name, resource, value) =>
+		properties.find(
+			(property) =>
+				property.name === name &&
+				NodeHelpers.displayParameter({ resource, operation: value }, property),
+		).default;
+	for (const [resource, idName] of [
+		['project', 'projectId'],
+		['projecttask', 'taskId'],
+	]) {
 		assert.equal(defaultValue('deleteTimeTrackings', resource, 'delete'), false);
-		const request = evaluate(resource, 'delete', { [idName]: 'entity', deleteTimeTrackings: false });
+		const request = evaluate(resource, 'delete', {
+			[idName]: 'entity',
+			deleteTimeTrackings: false,
+		});
 		assert.equal(request.method, 'POST');
 		assert.equal(request.body.deleteTimeTrackings, false);
-		assert.equal(evaluate(resource, 'delete', { [idName]: 'entity', deleteTimeTrackings: true }).body.deleteTimeTrackings, true);
+		assert.equal(
+			evaluate(resource, 'delete', { [idName]: 'entity', deleteTimeTrackings: true }).body
+				.deleteTimeTrackings,
+			true,
+		);
 		if (resource === 'projecttask') assert.deepEqual(request.body.taskIds, ['entity']);
 	}
 	assert.equal(defaultValue('deleteOperation', 'company', 'delete'), 'delete-only-company');
-	assert.deepEqual(evaluate('company', 'delete', { companyId: 'company', deleteOperation: 'move', moveToCompany: 'target' }).body,
-		{ deleteOperation: 'move', moveToCompany: 'target' });
+	assert.deepEqual(
+		evaluate('company', 'delete', {
+			companyId: 'company',
+			deleteOperation: 'move',
+			moveToCompany: 'target',
+		}).body,
+		{ deleteOperation: 'move', moveToCompany: 'target' },
+	);
 	assert.equal(defaultValue('deleteTasks', 'project', 'deletetasklist'), false);
 	assert.equal(defaultValue('deleteTimes', 'project', 'deletetasklist'), false);
-	assert.deepEqual(evaluate('project', 'deletetasklist', { projectId: 'project', taskListId: 'list', deleteTasks: false, deleteTimes: false }).body,
-		{ deleteTasks: false, deleteTimes: false });
+	assert.deepEqual(
+		evaluate('project', 'deletetasklist', {
+			projectId: 'project',
+			taskListId: 'list',
+			deleteTasks: false,
+			deleteTimes: false,
+		}).body,
+		{ deleteTasks: false, deleteTimes: false },
+	);
 	assert.equal(defaultValue('alsoDeleteChildren', 'document', 'delete'), true);
-	assert.deepEqual(evaluate('document', 'delete', { documentId: 'doc', alsoDeleteChildren: false }).qs, { alsoDeleteChildren: false });
+	assert.deepEqual(
+		evaluate('document', 'delete', { documentId: 'doc', alsoDeleteChildren: false }).qs,
+		{ alsoDeleteChildren: false },
+	);
 });

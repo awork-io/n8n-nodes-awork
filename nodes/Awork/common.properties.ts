@@ -8,6 +8,12 @@ export const commonProperties: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: [
+					'absence',
+					'comment',
+					'companycontact',
+					'file',
+					'projectmember',
+					'typeofwork',
 					'document',
 					'documentspace',
 					'timeentry',
@@ -18,6 +24,7 @@ export const commonProperties: INodeProperties[] = [
 				],
 				operation: [
 					'getall',
+					'getroles',
 					'getdocumentsofproject',
 					'getdocumentsofdocumentspace',
 					'gettimeentriesofproject',
@@ -43,6 +50,12 @@ export const commonProperties: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: [
+					'absence',
+					'comment',
+					'companycontact',
+					'file',
+					'projectmember',
+					'typeofwork',
 					'document',
 					'documentspace',
 					'timeentry',
@@ -53,6 +66,7 @@ export const commonProperties: INodeProperties[] = [
 				],
 				operation: [
 					'getall',
+					'getroles',
 					'getdocumentsofproject',
 					'getdocumentsofdocumentspace',
 					'gettimeentriesofproject',
@@ -80,6 +94,12 @@ export const commonProperties: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: [
+					'absence',
+					'comment',
+					'companycontact',
+					'file',
+					'projectmember',
+					'typeofwork',
 					'document',
 					'documentspace',
 					'timeentry',
@@ -90,6 +110,7 @@ export const commonProperties: INodeProperties[] = [
 				],
 				operation: [
 					'getall',
+					'getroles',
 					'getdocumentsofproject',
 					'getdocumentsofdocumentspace',
 					'gettimeentriesofproject',
