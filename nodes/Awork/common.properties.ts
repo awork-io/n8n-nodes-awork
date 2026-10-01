@@ -8,6 +8,9 @@ export const commonProperties: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: [
+					'document',
+					'documentspace',
+					'timeentry',
 					'user',
 					'company',
 					'project',
@@ -15,6 +18,12 @@ export const commonProperties: INodeProperties[] = [
 				],
 				operation: [
 					'getall',
+					'getdocumentsofproject',
+					'getdocumentsofdocumentspace',
+					'gettimeentriesofproject',
+					'gettimeentriesoftask',
+					'getcomments',
+					'gettasklists',
 					'getprojectstatusesofproject',
 					'gettasksofproject',
 					'gettypesofwork',
@@ -25,7 +34,7 @@ export const commonProperties: INodeProperties[] = [
 			},
 		},
 		default: false,
-		description: 'Whether to return all results or only up to a given limit'
+		description: 'Whether to return all results or only up to a given limit',
 	},
 	{
 		displayName: 'Filter By',
@@ -34,13 +43,22 @@ export const commonProperties: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: [
+					'document',
+					'documentspace',
+					'timeentry',
 					'user',
 					'company',
 					'project',
-					'projecttask'
+					'projecttask',
 				],
 				operation: [
 					'getall',
+					'getdocumentsofproject',
+					'getdocumentsofdocumentspace',
+					'gettimeentriesofproject',
+					'gettimeentriesoftask',
+					'getcomments',
+					'gettasklists',
 					'getprojectstatusesofproject',
 					'gettasksofproject',
 					'gettypesofwork',
@@ -52,7 +70,8 @@ export const commonProperties: INodeProperties[] = [
 		},
 		default: '',
 		placeholder: 'e.g., duration gt 5',
-		description: 'Filter the results by specific criteria. See https://developers.awork.com/filtering for details.'
+		description:
+			'Filter the results by specific criteria. See https://developers.awork.com/filtering for details.',
 	},
 	{
 		displayName: 'Order By',
@@ -61,6 +80,9 @@ export const commonProperties: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: [
+					'document',
+					'documentspace',
+					'timeentry',
 					'user',
 					'company',
 					'project',
@@ -68,6 +90,12 @@ export const commonProperties: INodeProperties[] = [
 				],
 				operation: [
 					'getall',
+					'getdocumentsofproject',
+					'getdocumentsofdocumentspace',
+					'gettimeentriesofproject',
+					'gettimeentriesoftask',
+					'getcomments',
+					'gettasklists',
 					'getprojectstatusesofproject',
 					'gettasksofproject',
 					'gettypesofwork',
@@ -79,6 +107,7 @@ export const commonProperties: INodeProperties[] = [
 		},
 		default: '',
 		placeholder: 'e.g., FirstName asc',
-		description: 'Order the results by a specific field and direction. See https://developers.awork.com/ordering for details.'
+		description:
+			'Order the results by a specific field and direction. See https://developers.awork.com/ordering for details.',
 	},
 ];

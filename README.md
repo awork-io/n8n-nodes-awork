@@ -1,6 +1,6 @@
 # n8n-nodes-awork
 
-This is an n8n community node that lets you automate workflows with [awork](https://www.awork.com/), a modern project management tool. It provides seamless integration between awork and n8n, allowing you to manage projects, tasks, and company/client data within your automation workflows.
+This is an n8n community node that lets you automate workflows with [awork](https://www.awork.com/), a modern project management tool. It provides seamless integration between awork and n8n, allowing you to manage projects, tasks, time entries, documents, and company/client data within your automation workflows.
 
 ## Installation
 
@@ -31,38 +31,31 @@ To use the awork node, you'll need API credentials from awork:
 
 ## Available Operations
 
-The awork node provide comprehensive access to awork's project management features, including:
+The node supports the following operations:
 
-### Projects
-- **Create Project**: Start new projects with custom settings
-- **Get Project**: Retrieve project information
-- **List Projects**: Get all projects with filtering options
-- **Change Project Status**: Changes the status of a project
+| Resource | Operations |
+| --- | --- |
+| Projects | Create, get, list, update, delete; change status; list/create project and task statuses |
+| Project tasks | Create, get, list by project, update, delete; change status; set assignees and custom fields; add tags and comments; list comments |
+| Companies | Create, get, list, update, delete |
+| Time entries | Create, get, list, update, delete; list by project or task |
+| Documents | Create, get, list, update metadata, get/update content, delete; list by project or document space |
+| Document spaces | Create, get, list, update, delete |
+| Task lists (under Project) | Create, get, list, update, delete; add tasks via Project Task |
+| Users | Get, list |
+| Types of work (under Project Task) | Create, list |
 
-### Tasks
-- **Create Task**: Add new tasks to projects
-- **Get Task**: Retrieve specific task information
-- **List Tasks**: Get tasks with advanced filtering
-- **Change Task Status**: Changes the status of a task
-- **Set Task Custom Fields**: Sets the value of a task custom field
-- **Add Task Comment**: Adds a comment to a task
+List operations support **Return All**, **Filter By**, and **Order By**. With Return All disabled, the node retrieves the first API page; enable it to retrieve all pages.
 
-### Companies
-- **Create Company**: Add new companies to your workspace
-- **Get Company**: Retrieve company details
-- **List Companies**: Get all companies with filtering
+Updates expose only the selected **Update Fields** in the request, including explicit `false`, `0`, or empty text values. Company, project, and task updates require the name; time-entry updates require the type of work ID and IANA timezone, as specified by the API. Supply the current values when changing other fields.
 
-### Users
-- **List Users**: Get all users with filtering
+Time-entry creation uses separate UTC date and time fields (time format `HH:mm:ss`), a user ID, a type of work ID, and the entry's original IANA timezone. For a completed entry, add **Duration (Seconds)** or an end date/time under **Additional Fields**. The node sends UTC fields only, so it does not mix the API's UTC and local date/time groups.
 
-### Other
-- **HTTP**: With a generic HTTP Request, any awork API endpoint can be used
+Documents accept HTML or Markdown text. The node uploads content as a UTF-8 file using the API's required multipart format. Use **Update Document** for metadata and **Update Document Content** for the text. Creating a document supports a project, document space, task, or private document.
 
-For detailed information about each operation and its parameters, visit the relevant sections in the [awork Developer Documentation](https://developers.awork.com/):
-- [Projects](https://developers.awork.com/projects)
-- [Tasks](https://developers.awork.com/tasks)
-- [Companies](https://developers.awork.com/companies)
-- [Users](https://developers.awork.com/users)
+Project and task deletion preserve time entries by default. Company deletion defaults to deleting only the company. Task-list deletion preserves tasks and times by default. Document deletion exposes **Also Delete Children**; document-space deletion removes its documents according to the API.
+
+Existing operation values are preserved so saved workflows continue to work. For endpoints not exposed here, use n8n's HTTP Request node with awork API credentials. See the [awork OpenAPI specification](https://api.awork.com/openapi/v1) for the request schemas and [awork Developer Documentation](https://developers.awork.com/) for API usage.
 
 ## Example Workflows
 
@@ -72,7 +65,9 @@ Here are some common use cases for the awork nodes:
 2. **Task Synchronization**: Sync tasks between awork and other project management tools
 3. **Company Management**: Automatically create companies in awork from form submissions
 4. **Status Updates**: Update task statuses based on external triggers
-5. **Reporting**: Extract project and task data for custom reporting dashboards
+5. **Time Tracking**: Create and synchronize time entries from calendars or external time trackers
+6. **Document Automation**: Create and update project documents from workflow results
+7. **Reporting**: Extract project and task data for custom reporting dashboards
 
 ## Resources
 

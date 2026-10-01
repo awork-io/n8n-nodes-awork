@@ -1,17 +1,14 @@
 import { INodeProperties } from 'n8n-workflow';
 import { aworkApiPagination } from '../../GenericFunctions';
 
-export const taskResource: INodeProperties =
-{
+export const taskResource: INodeProperties = {
 	displayName: 'Operation',
 	name: 'operation',
 	type: 'options',
 	noDataExpression: true,
 	displayOptions: {
 		show: {
-			resource: [
-				'projecttask',
-			],
+			resource: ['projecttask'],
 		},
 	},
 	options: [
@@ -33,7 +30,7 @@ export const taskResource: INodeProperties =
 				},
 				send: {
 					paginate: true,
-				}
+				},
 			},
 		},
 		{
@@ -43,8 +40,8 @@ export const taskResource: INodeProperties =
 			routing: {
 				request: {
 					method: 'GET',
-					url: '=api/v1/tasks/{{$parameter["taskId"]}}'
-				}
+					url: '=api/v1/tasks/{{$parameter["taskId"]}}',
+				},
 			},
 		},
 		{
@@ -59,13 +56,13 @@ export const taskResource: INodeProperties =
 					body: {
 						baseType: 'projecttask',
 						entityId: '={{$parameter["projectId"]}}', // ID of the project the task belongs to
-						name: '={{$parameter["taskName"]}}',     // Task name
-						description: '={{$parameter["taskDescription"] || undefined}}',  // Optional task description
+						name: '={{$parameter["taskName"]}}', // Task name
+						description: '={{$parameter["taskDescription"] || undefined}}', // Optional task description
 						dueOn: '={{$parameter["dueDate"] || undefined}}', // Optional due date for the task
 						typeOfWorkId: '={{$parameter["typeOfWorkId"] || undefined}}', // Optional type of work ID
 						taskStatusId: '={{$parameter["taskStatusId"] || undefined}}', // Optional task status ID
 						plannedDuration: '={{$parameter["plannedDuration"] || undefined}}', // Optional planned duration for the task
-					}
+					},
 				},
 			},
 		},
@@ -81,8 +78,8 @@ export const taskResource: INodeProperties =
 						{
 							textValue: '={{$parameter["textValue"]}}',
 							customFieldDefinitionId: '={{$parameter["customFieldDefinitionId"]}}',
-						}
-					]
+						},
+					],
 				},
 			},
 		},
@@ -97,8 +94,8 @@ export const taskResource: INodeProperties =
 					body: [
 						{
 							name: '={{$parameter["tagName"]}}',
-						}
-					]
+						},
+					],
 				},
 			},
 		},
@@ -114,8 +111,8 @@ export const taskResource: INodeProperties =
 						{
 							taskId: '={{$parameter["taskId"]}}',
 							statusId: '={{$parameter["statusId"]}}',
-						}
-					]
+						},
+					],
 				},
 			},
 		},
@@ -129,7 +126,7 @@ export const taskResource: INodeProperties =
 					url: '=api/v1/tasks/{{$parameter["taskId"]}}/comments',
 					body: {
 						message: '={{$parameter["commentMessage"]}}',
-					}
+					},
 				},
 			},
 		},
@@ -141,9 +138,7 @@ export const taskResource: INodeProperties =
 				request: {
 					method: 'POST',
 					url: '=api/v1/tasks/{{$parameter["taskId"]}}/setassignees',
-					body: [
-						'={{$parameter["userId"]}}'
-					]
+					body: ['={{$parameter["userId"]}}'],
 				},
 			},
 		},
@@ -165,7 +160,7 @@ export const taskResource: INodeProperties =
 				},
 				send: {
 					paginate: true,
-				}
+				},
 			},
 		},
 		{
@@ -186,7 +181,7 @@ export const taskResource: INodeProperties =
 				},
 				send: {
 					paginate: true,
-				}
+				},
 			},
 		},
 		{
@@ -201,7 +196,7 @@ export const taskResource: INodeProperties =
 						name: '={{$parameter["name"]}}',
 						description: '={{$parameter["description"]}}',
 						icon: '={{$parameter["icon"]}}',
-					}
+					},
 				},
 			},
 		},
@@ -213,7 +208,7 @@ export const taskResource: INodeProperties =
 				request: {
 					method: 'POST',
 					url: '=api/v1/projects/{{$parameter["projectId"]}}/tasklists/{{$parameter["taskListId"]}}/addtasks',
-					body: [{ taskId: '={{$parameter["taskId"]}}' }]
+					body: [{ taskId: '={{$parameter["taskId"]}}' }],
 				},
 			},
 		},
@@ -236,7 +231,34 @@ export const taskResource: INodeProperties =
 				},
 				send: {
 					paginate: true,
-				}
+				},
+			},
+		},
+		{
+			name: 'Update Task',
+			value: 'update',
+			action: 'Update task',
+			routing: {
+				request: {
+					method: 'PUT',
+					url: '=api/v1/tasks/{{$parameter["taskId"]}}',
+					body: '={{ { ...$parameter["updateFields"], name: $parameter["taskName"] } }}',
+				},
+			},
+		},
+		{
+			name: 'Delete Task',
+			value: 'delete',
+			action: 'Delete task',
+			routing: {
+				request: {
+					method: 'POST',
+					url: '=api/v1/tasks/delete',
+					body: {
+						taskIds: ['={{$parameter["taskId"]}}'],
+						deleteTimeTrackings: '={{$parameter["deleteTimeTrackings"]}}',
+					},
+				},
 			},
 		},
 	],

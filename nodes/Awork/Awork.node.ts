@@ -10,6 +10,10 @@ import { companyResource } from './actions/company/company.resource';
 import { companyInputs } from './actions/company/company.input';
 import { documentResource } from './actions/document/document.resource';
 import { documentInputs } from './actions/document/document.input';
+import { timeEntryResource } from './actions/timeentry/timeentry.resource';
+import { timeEntryInputs } from './actions/timeentry/timeentry.input';
+import { documentSpaceResource } from './actions/documentspace/documentspace.resource';
+import { documentSpaceInputs } from './actions/documentspace/documentspace.input';
 import { commonInputs } from './actions/common.input';
 
 export class Awork implements INodeType {
@@ -58,6 +62,7 @@ export class Awork implements INodeType {
 						name: 'Document',
 						value: 'document',
 					},
+					{ name: 'Document Space', value: 'documentspace' },
 					{
 						name: 'Project',
 						value: 'project',
@@ -66,6 +71,7 @@ export class Awork implements INodeType {
 						name: 'Project Task',
 						value: 'projecttask',
 					},
+					{ name: 'Time Entry', value: 'timeentry' },
 					{
 						name: 'User',
 						value: 'user',
@@ -88,10 +94,14 @@ export class Awork implements INodeType {
 			// Operations for the Document resource
 			documentResource,
 			...documentInputs,
+			documentSpaceResource,
+			...documentSpaceInputs,
+			timeEntryResource,
+			...timeEntryInputs,
 			// Common inputs such as name, description, type, etc.
 			...commonInputs,
 			// Optional fields for pagination and filtering
-			...commonProperties
+			...commonProperties,
 		],
 	};
 }

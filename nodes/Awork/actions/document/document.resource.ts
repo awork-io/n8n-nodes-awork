@@ -1,17 +1,15 @@
 import { INodeProperties } from 'n8n-workflow';
+import { documentMultipartRequest } from './document.helpers';
 import { aworkApiPagination } from '../../GenericFunctions';
 
-export const documentResource: INodeProperties =
-{
+export const documentResource: INodeProperties = {
 	displayName: 'Operation',
 	name: 'operation',
 	type: 'options',
 	noDataExpression: true,
 	displayOptions: {
 		show: {
-			resource: [
-				'document',
-			],
+			resource: ['document'],
 		},
 	},
 	options: [
@@ -33,7 +31,7 @@ export const documentResource: INodeProperties =
 				},
 				send: {
 					paginate: true,
-				}
+				},
 			},
 		},
 		{
@@ -43,8 +41,8 @@ export const documentResource: INodeProperties =
 			routing: {
 				request: {
 					method: 'GET',
-					url: '=api/v1/documents/{{$parameter["documentId"]}}'
-				}
+					url: '=api/v1/documents/{{$parameter["documentId"]}}',
+				},
 			},
 		},
 		{
@@ -55,8 +53,8 @@ export const documentResource: INodeProperties =
 			routing: {
 				request: {
 					method: 'GET',
-					url: '=api/v1/documents/{{$parameter["documentId"]}}/content'
-				}
+					url: '=api/v1/documents/{{$parameter["documentId"]}}/content',
+				},
 			},
 		},
 		{
@@ -77,7 +75,7 @@ export const documentResource: INodeProperties =
 				},
 				send: {
 					paginate: true,
-				}
+				},
 			},
 		},
 		{
@@ -98,7 +96,7 @@ export const documentResource: INodeProperties =
 				},
 				send: {
 					paginate: true,
-				}
+				},
 			},
 		},
 		{
@@ -109,15 +107,39 @@ export const documentResource: INodeProperties =
 				request: {
 					method: 'POST',
 					url: '=api/v1/documents',
-					body: {
-						name: '={{$parameter["documentName"]}}',
-						content: '={{$parameter["documentContent"]}}',
-						documentSpaceId: '={{$parameter["documentSpaceId"] || undefined}}',
-						projectId: '={{$parameter["projectId"] || undefined}}',
-						emoji: '={{$parameter["emoji"] || undefined}}',
-						parentId: '={{$parameter["parentId"] || undefined}}',
-					}
+					body: '={{ { ...$parameter["additionalFields"], name: $parameter["documentName"], content: $parameter["documentContent"], contentFormat: $parameter["contentFormat"] || "html", documentSpaceId: $parameter["documentSpaceId"] || undefined, projectId: $parameter["projectId"] || undefined, emoji: $parameter["emoji"] || undefined, parentId: $parameter["parentId"] || undefined } }}',
 				},
+				send: { preSend: [documentMultipartRequest] },
+			},
+		},
+		{
+			name: 'Update Document',
+			value: 'update',
+			action: 'Update a document',
+			description: 'Update document metadata and location',
+			routing: {
+				request: {
+					method: 'PUT',
+					url: '=api/v1/documents/{{$parameter["documentId"]}}',
+					body: '={{$parameter["updateFields"]}}',
+				},
+			},
+		},
+		{
+			name: 'Update Document Content',
+			value: 'updatecontent',
+			action: 'Update document content',
+			description: 'Replace document content with HTML or Markdown',
+			routing: {
+				request: {
+					method: 'PUT',
+					url: '=api/v1/documents/{{$parameter["documentId"]}}/content',
+					body: {
+						content: '={{$parameter["documentContent"]}}',
+						contentFormat: '={{$parameter["contentFormat"] || "html"}}',
+					},
+				},
+				send: { preSend: [documentMultipartRequest] },
 			},
 		},
 		{
@@ -127,8 +149,9 @@ export const documentResource: INodeProperties =
 			routing: {
 				request: {
 					method: 'DELETE',
-					url: '=api/v1/documents/{{$parameter["documentId"]}}'
-				}
+					url: '=api/v1/documents/{{$parameter["documentId"]}}',
+					qs: { alsoDeleteChildren: '={{$parameter["alsoDeleteChildren"]}}' },
+				},
 			},
 		},
 	],
