@@ -43,9 +43,17 @@ The node supports the following operations:
 | Document spaces | Create, get, list, update, delete |
 | Task lists (under Project) | Create, get, list, update, delete; add tasks via Project Task |
 | Users | Get, list |
-| Types of work (under Project Task) | Create, list |
+| Custom fields | Read workspace/project definitions and project/task values; set or clear typed values |
+| Comments | Create, get, list, update, delete on projects, tasks, and documents; resolve document comments |
+| Project members | List, add, update, remove; list project roles |
+| Company contacts | Create, get, list, update, delete email, phone, address, URL, and custom contact information |
+| Checklist items | Create, get, list, update, delete under a task |
+| Absences | Create, get, list, update, delete; full-day and half-day options |
+| Tags | List used/entity tags, add/remove entity tags, update/delete tags globally for companies/projects/tasks/users |
+| Files | Upload binary data or a public URL, get, update metadata, delete, download; list where supported |
+| Types of work | Create, get, list, update, delete with optional replacement, archive/unarchive, list icons; existing Project Task operations retained |
 
-List operations support **Return All**, **Filter By**, and **Order By**. With Return All disabled, the node retrieves the first API page; enable it to retrieve all pages.
+Paginated list operations support **Return All**, **Filter By**, and **Order By**. With Return All disabled, the node retrieves the first API page; enable it to retrieve all pages. Custom-field definitions, project members, checklist items, tags, and type-of-work icons return complete unpaginated lists.
 
 Updates expose only the selected **Update Fields** in the request, including explicit `false`, `0`, or empty text values. Company, project, and task updates require the name; time-entry updates require the type of work ID and IANA timezone, as specified by the API. Supply the current values when changing other fields.
 
@@ -54,6 +62,14 @@ Time-entry creation uses separate UTC date and time fields (time format `HH:mm:s
 Documents accept HTML or Markdown text. The node uploads content as a UTF-8 file using the API's required multipart format. Use **Update Document** for metadata and **Update Document Content** for the text. Creating a document supports a project, document space, task, or private document.
 
 Project and task deletion preserve time entries by default. Company deletion defaults to deleting only the company. Task-list deletion preserves tasks and times by default. Document deletion exposes **Also Delete Children**; document-space deletion removes its documents according to the API.
+
+**Custom Field** reads definitions and values for existing fields. Choose Project or Task, a field definition ID, and a value type (text/link, number, boolean, date/time, user, client, or selection option). **Clear Value** sends an explicit null. Creating, editing, deleting, or linking field definitions is not exposed.
+
+**Comment**, **Tag**, and **File** use a **Parent Resource** selector and **Parent ID**. Comments support projects, tasks, and documents; resolving a comment applies only to documents. Project-member changes require a user ID and project role ID; use **Get Project Roles** to find the role.
+
+Company contacts require a type and subtype, except custom contacts, which require a label. Use address fields for postal addresses. Absence create/update requires a user and start/end dates; add the provider and half-day flags as needed. An external provider makes the absence managed by that provider and read-only in the awork UI.
+
+Files support projects, tasks, documents, companies, and users. **Upload File** reads the specified incoming n8n binary field (default `data`); **Download File** writes the chosen output binary field, retaining the API filename and MIME type. **Upload File From URL** lets awork fetch a public URL. File listing is available for projects, tasks, documents, and users; the API has no company file-list endpoint.
 
 Existing operation values are preserved so saved workflows continue to work. For endpoints not exposed here, use n8n's HTTP Request node with awork API credentials. See the [awork OpenAPI specification](https://api.awork.com/openapi/v1) for the request schemas and [awork Developer Documentation](https://developers.awork.com/) for API usage.
 

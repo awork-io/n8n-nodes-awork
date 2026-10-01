@@ -1,145 +1,133 @@
 {
-  "source": "https://api.awork.com/openapi/v1",
-  "paths": {
-    "/projects": [
-      "get",
-      "post"
-    ],
-    "/projects/{projectId}": [
-      "get",
-      "put"
-    ],
-    "/projectstatuses": [
-      "get"
-    ],
-    "/projects/{projectId}/projectstatuses": [
-      "get",
-      "post"
-    ],
-    "/projects/{projectId}/taskstatuses": [
-      "get",
-      "post"
-    ],
-    "/projects/{projectId}/tasklists": [
-      "get",
-      "post"
-    ],
-    "/projects/{projectId}/changestatus": [
-      "post"
-    ],
-    "/projects/{projectId}/comments": [
-      "delete",
-      "get",
-      "post"
-    ],
-    "/projects/{projectId}/delete": [
-      "post"
-    ],
-    "/projects/{projectId}/tasklists/{taskListId}": [
-      "get",
-      "put"
-    ],
-    "/projects/{projectId}/tasklists/{taskListId}/delete": [
-      "post"
-    ],
-    "/projects/{projectId}/projecttasks": [
-      "get"
-    ],
-    "/tasks/{taskId}": [
-      "get",
-      "put"
-    ],
-    "/tasks": [
-      "post"
-    ],
-    "/tasks/{taskId}/setcustomfields": [
-      "post"
-    ],
-    "/tasks/{taskId}/addtags": [
-      "post"
-    ],
-    "/tasks/changestatuses": [
-      "post"
-    ],
-    "/tasks/{taskId}/comments": [
-      "delete",
-      "get",
-      "post"
-    ],
-    "/tasks/{taskId}/setassignees": [
-      "post"
-    ],
-    "/typeofwork": [
-      "get",
-      "post"
-    ],
-    "/projects/{projectId}/tasklists/{taskListId}/addtasks": [
-      "post"
-    ],
-    "/tasks/delete": [
-      "post"
-    ],
-    "/users": [
-      "get"
-    ],
-    "/users/{userId}": [
-      "delete",
-      "get",
-      "put"
-    ],
-    "/companies": [
-      "get",
-      "post"
-    ],
-    "/companies/{companyId}": [
-      "get",
-      "put"
-    ],
-    "/companies/{companyId}/delete": [
-      "post"
-    ],
-    "/documents": [
-      "get",
-      "post"
-    ],
-    "/documents/{documentId}": [
-      "delete",
-      "get",
-      "put"
-    ],
-    "/documents/{documentId}/content": [
-      "get",
-      "put"
-    ],
-    "/documentspaces/{documentSpaceId}/documents": [
-      "get"
-    ],
-    "/projects/{projectId}/documents": [
-      "get"
-    ],
-    "/documentspaces": [
-      "get",
-      "post"
-    ],
-    "/documentspaces/{documentSpaceId}": [
-      "delete",
-      "get",
-      "put"
-    ],
-    "/timeentries": [
-      "get",
-      "post"
-    ],
-    "/timeentries/{timeEntryId}": [
-      "delete",
-      "get",
-      "put"
-    ],
-    "/projects/{projectId}/timeentries": [
-      "get"
-    ],
-    "/tasks/{taskId}/timeentries": [
-      "get"
-    ]
-  }
+	"source": "https://api.awork.com/openapi/v1",
+	"paths": {
+		"/absences": ["get", "post"],
+		"/absences/{absenceId}": ["delete", "get", "put"],
+		"/companies": ["get", "post"],
+		"/companies/deletetags": ["post"],
+		"/companies/industries": ["get"],
+		"/companies/tags": ["get"],
+		"/companies/updatetags": ["post"],
+		"/companies/{companyId}": ["get", "put"],
+		"/companies/{companyId}/addtags": ["post"],
+		"/companies/{companyId}/contactinfo": ["get", "post"],
+		"/companies/{companyId}/contactinfo/{contactInfoId}": ["delete", "get", "put"],
+		"/companies/{companyId}/delete": ["post"],
+		"/companies/{companyId}/deletetags": ["post"],
+		"/companies/{companyId}/files": ["delete", "post"],
+		"/companies/{companyId}/files/byurl": ["post"],
+		"/companies/{companyId}/files/{fileId}": ["delete", "get", "put"],
+		"/companies/{companyId}/files/{fileId}/download": ["get"],
+		"/companies/{companyId}/tags": ["get"],
+		"/customfielddefinitions": ["get", "post"],
+		"/documents": ["get", "post"],
+		"/documents/{documentId}": ["delete", "get", "put"],
+		"/documents/{documentId}/comments": ["delete", "get", "post"],
+		"/documents/{documentId}/comments/{commentId}": ["delete", "get", "put"],
+		"/documents/{documentId}/comments/{commentId}/setresolved": ["post"],
+		"/documents/{documentId}/content": ["get", "put"],
+		"/documents/{documentId}/files": ["delete", "get", "post"],
+		"/documents/{documentId}/files/byuploadid": ["post"],
+		"/documents/{documentId}/files/byurl": ["post"],
+		"/documents/{documentId}/files/{fileId}": ["delete", "get", "put"],
+		"/documents/{documentId}/files/{fileId}/download": ["get"],
+		"/documentspaces": ["get", "post"],
+		"/documentspaces/{documentSpaceId}": ["delete", "get", "put"],
+		"/documentspaces/{documentSpaceId}/documents": ["get"],
+		"/projectroles": ["get", "post"],
+		"/projects": ["get", "post"],
+		"/projects/deletetags": ["post"],
+		"/projects/projecttasks/tags": ["get"],
+		"/projects/tags": ["get"],
+		"/projects/updatetags": ["post"],
+		"/projects/{projectId}": ["get", "put"],
+		"/projects/{projectId}/addprojectmember": ["post"],
+		"/projects/{projectId}/addtags": ["post"],
+		"/projects/{projectId}/changestatus": ["post"],
+		"/projects/{projectId}/comments": ["delete", "get", "post"],
+		"/projects/{projectId}/comments/{commentId}": ["delete", "get", "put"],
+		"/projects/{projectId}/customfielddefinitions": ["get"],
+		"/projects/{projectId}/delete": ["post"],
+		"/projects/{projectId}/deletetags": ["post"],
+		"/projects/{projectId}/documents": ["get"],
+		"/projects/{projectId}/files": ["delete", "get", "post"],
+		"/projects/{projectId}/files/byuploadid": ["post"],
+		"/projects/{projectId}/files/byurl": ["post"],
+		"/projects/{projectId}/files/{fileId}": ["delete", "get", "put"],
+		"/projects/{projectId}/files/{fileId}/download": ["get"],
+		"/projects/{projectId}/members": ["get"],
+		"/projects/{projectId}/projectstatuses": ["get", "post"],
+		"/projects/{projectId}/projecttasks": ["get"],
+		"/projects/{projectId}/removeprojectmember": ["post"],
+		"/projects/{projectId}/setcustomfields": ["post"],
+		"/projects/{projectId}/tags": ["get"],
+		"/projects/{projectId}/tasklists": ["get", "post"],
+		"/projects/{projectId}/tasklists/{taskListId}": ["get", "put"],
+		"/projects/{projectId}/tasklists/{taskListId}/addtasks": ["post"],
+		"/projects/{projectId}/tasklists/{taskListId}/delete": ["post"],
+		"/projects/{projectId}/taskstatuses": ["get", "post"],
+		"/projects/{projectId}/timeentries": ["get"],
+		"/projects/{projectId}/updateprojectmember": ["post"],
+		"/projectstatuses": ["get"],
+		"/tasks": ["post"],
+		"/tasks/assignuserbyemail": ["post"],
+		"/tasks/changebasetypes": ["post"],
+		"/tasks/changelists": ["post"],
+		"/tasks/changestatuses": ["post"],
+		"/tasks/changesubtasks": ["post"],
+		"/tasks/changesubtaskstoparent": ["post"],
+		"/tasks/changetypeofwork": ["post"],
+		"/tasks/delete": ["post"],
+		"/tasks/deletetags": ["post"],
+		"/tasks/settaskpriority": ["post"],
+		"/tasks/tags": ["get"],
+		"/tasks/updatetags": ["post"],
+		"/tasks/{taskId}": ["get", "put"],
+		"/tasks/{taskId}/addtags": ["post"],
+		"/tasks/{taskId}/checklistitems": ["get", "post"],
+		"/tasks/{taskId}/checklistitems/tosubtasks": ["post"],
+		"/tasks/{taskId}/checklistitems/{checklistItemId}": ["delete", "get", "put"],
+		"/tasks/{taskId}/comments": ["delete", "get", "post"],
+		"/tasks/{taskId}/comments/{commentId}": ["delete", "get", "put"],
+		"/tasks/{taskId}/deletetags": ["post"],
+		"/tasks/{taskId}/files": ["delete", "get", "post"],
+		"/tasks/{taskId}/files/byuploadid": ["post"],
+		"/tasks/{taskId}/files/byurl": ["post"],
+		"/tasks/{taskId}/files/{fileId}": ["delete", "get", "put"],
+		"/tasks/{taskId}/files/{fileId}/download": ["get"],
+		"/tasks/{taskId}/setassignees": ["post"],
+		"/tasks/{taskId}/setcustomfields": ["post"],
+		"/tasks/{taskId}/tags": ["get"],
+		"/tasks/{taskId}/timeentries": ["get"],
+		"/timeentries": ["get", "post"],
+		"/timeentries/delete": ["post"],
+		"/timeentries/setbillable": ["post"],
+		"/timeentries/setbilled": ["post"],
+		"/timeentries/settypeofwork": ["post"],
+		"/timeentries/setunbillable": ["post"],
+		"/timeentries/setunbilled": ["post"],
+		"/timeentries/simplified": ["get"],
+		"/timeentries/{timeEntryId}": ["delete", "get", "put"],
+		"/typeofwork": ["get", "post"],
+		"/typeofwork/icons": ["get"],
+		"/typeofwork/{typeOfWorkId}": ["get", "put"],
+		"/typeofwork/{typeOfWorkId}/delete": ["post"],
+		"/typeofwork/{typeOfWorkId}/setarchived": ["post"],
+		"/users": ["get"],
+		"/users/deletetags": ["post"],
+		"/users/me": ["get"],
+		"/users/projecttimebookings": ["get"],
+		"/users/tags": ["get"],
+		"/users/timebookings": ["get"],
+		"/users/updatetags": ["post"],
+		"/users/workload": ["get"],
+		"/users/{userId}": ["delete", "get", "put"],
+		"/users/{userId}/addtags": ["post"],
+		"/users/{userId}/deletetags": ["post"],
+		"/users/{userId}/files": ["delete", "get", "post"],
+		"/users/{userId}/files/byurl": ["post"],
+		"/users/{userId}/files/{fileId}": ["delete", "get", "put"],
+		"/users/{userId}/files/{fileId}/download": ["get"],
+		"/users/{userId}/tags": ["get"]
+	}
 }
