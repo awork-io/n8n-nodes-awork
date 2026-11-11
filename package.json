@@ -1,10 +1,11 @@
 {
   "name": "n8n-nodes-awork",
   "version": "0.1.63",
-  "description": "Automate your workflows with the awork API",
+  "description": "Automate your workflows with awork and awork AI",
   "keywords": [
     "n8n-community-node-package",
-    "awork"
+    "awork",
+    "awork AI"
   ],
   "license": "MIT",
   "homepage": "https://www.awork.com",
@@ -35,11 +36,14 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "credentials": [
-      "dist/credentials/AworkApi.credentials.js"
+      "dist/credentials/AworkApi.credentials.js",
+      "dist/credentials/AworkAiApi.credentials.js"
     ],
     "nodes": [
       "dist/nodes/Awork/Awork.node.js",
-      "dist/nodes/Awork/AworkTrigger.node.js"
+      "dist/nodes/Awork/AworkTrigger.node.js",
+      "dist/nodes/AworkAi/AworkAi.node.js",
+      "dist/nodes/AworkAi/AworkAiTrigger.node.js"
     ]
   },
   "devDependencies": {

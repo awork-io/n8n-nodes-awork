@@ -1,6 +1,35 @@
 # n8n-nodes-awork
 
-This is an n8n community node that lets you automate workflows with [awork](https://www.awork.com/), a modern project management tool. It provides seamless integration between awork and n8n, allowing you to manage projects, tasks, time entries, documents, and company/client data within your automation workflows.
+This n8n community package provides nodes for [awork](https://www.awork.com/) and [awork AI](https://awork-ai.com/). Use **awork** for project management workflows, or **awork AI** for agents, threads, schedules, and shared workspace resources.
+
+## awork AI
+
+Install the same `n8n-nodes-awork` package, then select **awork AI** on your canvas. Create **awork AI API** credentials with an API key from your awork AI workspace. This node sends requests and tests credentials against `https://api.awork-ai.com`.
+
+| Resource | Operations |
+| --- | --- |
+| Agents | Create, get, list visible agents |
+| Threads | Create with a first message, get, send a message, get messages, get message status, cancel the active run |
+| Schedules | Create, list by agent, list owned schedules, update, delete, run, enable/disable |
+| Projects | Create, get, list, update, delete; change status; list/create project statuses |
+| Documents | Create, get, list, update metadata/content, delete; list by project or document space |
+| Document spaces | Create, get, list, update, delete |
+| Files | Upload binary data or a public URL, get, list, update metadata, delete, download for projects, documents, and users |
+| Users | Get, list |
+
+The awork AI node reuses shared awork operations and pagination. Its controls exclude tasks, task lists, task statuses, time entries, and project billing fields. Use an existing agent ID to start a custom-agent thread or manage its schedules. API permissions, workspace AI availability, and usage limits still apply.
+
+**AI replies are asynchronous.** Create Thread and Send Message return acceptance receipts. Keep the thread ID and accepted message ID, add an n8n Wait step, and use **Get Message Status** to check progress. Use **Get Messages** to read the reply. Retrying a submission can create another thread or message. See the [thread API](https://developers.awork.com/apiv1/agent-threads/post-agents-threads).
+
+Schedules use a cron rule and an optional IANA timezone. **Update Schedule** replaces its settings: supply the current optional values to retain them. Use **Set Enabled** to pause or resume without replacing other settings.
+
+### awork AI Trigger
+
+Select **awork AI Trigger** to start a workflow from awork AI webhook events. It uses **awork AI API** credentials with admin access and a public n8n webhook URL. Select one or more events, then activate the workflow. The trigger registers the webhook on activation and removes it on deactivation. Its output contains `body`, `headers`, and `query`, matching the existing awork trigger.
+
+The event selector loads available event types from the API. It includes supported project and user events and excludes task, company, time-tracking, and absence events. Agent events will appear in the selector when the API returns them; refresh the event list to see new types. They must be selected before they can start the workflow. The trigger does not poll for AI replies.
+
+The existing **awork** and **awork Trigger** nodes retain their operations and credentials.
 
 ## Installation
 
