@@ -1,0 +1,162 @@
+{
+	"source": "https://developers.awork.com/openapi/v1.json",
+	"retrievedOn": "2026-11-11",
+	"paths": {
+		"/agents": [
+			"get",
+			"post"
+		],
+		"/agents/{agentId}": [
+			"get",
+			"put"
+		],
+		"/agents/threads": [
+			"post"
+		],
+		"/agents/threads/{threadId}": [
+			"get"
+		],
+		"/agents/threads/{threadId}/cancel": [
+			"post"
+		],
+		"/agents/threads/{threadId}/messages": [
+			"get",
+			"post"
+		],
+		"/agents/threads/{threadId}/messages/{messageId}/status": [
+			"get"
+		],
+		"/agents/{agentId}/schedules": [
+			"get",
+			"post"
+		],
+		"/agents/schedules/me": [
+			"get"
+		],
+		"/agents/{agentId}/schedules/{scheduleId}": [
+			"delete",
+			"put"
+		],
+		"/agents/{agentId}/schedules/{scheduleId}/run": [
+			"post"
+		],
+		"/agents/{agentId}/schedules/{scheduleId}/setenabled": [
+			"post"
+		],
+		"/webhooks": [
+			"get",
+			"post"
+		],
+		"/webhooks/{webhookId}": [
+			"delete",
+			"get",
+			"put"
+		],
+		"/webhooks/eventtypes": [
+			"get"
+		]
+	},
+	"forms": {
+		"AiThreadCreateRequestModel": {
+			"required": [
+				"type"
+			],
+			"properties": [
+				"presetKey",
+				"content",
+				"attachments",
+				"modelProvider",
+				"modelName",
+				"reasoningLevel",
+				"toolAccess",
+				"connectorIds",
+				"connectorConnections",
+				"skillIds",
+				"type",
+				"agentId",
+				"title",
+				"projectId",
+				"taskId",
+				"clientId",
+				"documentId",
+				"localFolders"
+			]
+		},
+		"AgentThreadMessageRequestModel": {
+			"required": [],
+			"properties": [
+				"presetKey",
+				"content",
+				"attachments",
+				"modelProvider",
+				"modelName",
+				"reasoningLevel",
+				"toolAccess",
+				"connectorIds",
+				"connectorConnections",
+				"skillIds",
+				"answerToInterruptId"
+			]
+		},
+		"CreateAgentRequestModel": {
+			"required": [
+				"name"
+			],
+			"properties": [
+				"name",
+				"description",
+				"modelProvider",
+				"modelName",
+				"presetKey",
+				"reasoningLevel",
+				"systemPrompt",
+				"webSearchEnabled",
+				"aworkAccessEnabled",
+				"googleGenAiAccessEnabled",
+				"openAiImageGenerationAccessEnabled"
+			]
+		},
+		"CreateAgentScheduleRequestModel": {
+			"required": [
+				"cronRule",
+				"name"
+			],
+			"properties": [
+				"name",
+				"prompt",
+				"cronRule",
+				"recurrenceInterval",
+				"timezone",
+				"projectId",
+				"taskId",
+				"isEnabled"
+			]
+		},
+		"UpdateAgentScheduleRequestModel": {
+			"required": [
+				"cronRule",
+				"name"
+			],
+			"properties": [
+				"name",
+				"prompt",
+				"cronRule",
+				"recurrenceInterval",
+				"timezone",
+				"projectId",
+				"taskId",
+				"isEnabled",
+				"type",
+				"agentId"
+			]
+		},
+		"SetAgentScheduleEnabledRequestModel": {
+			"required": [
+				"isEnabled"
+			],
+			"properties": [
+				"isEnabled"
+			]
+		}
+	}
+}
